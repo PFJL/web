@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .right{
+            position: absolute;
+            right: 0px;
+            width: 200px;
+            background: red;
+        }
+        .left{
+            margin-right: 200px;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+        <div class="main">
+            <div class="right">a</div>
+            <div class="left">b</div>
+        </div>
+        
+    <script>
+    /*
+    1、主流浏览器
+        ie trident
+        firefox gecko
+        google chrome blink
+        safari webkit
+        opera  presto
+
+    2、js引入
+
+    3、变量  var 
+
+    4、数据类型：
+        （1）原始值
+            number  string  boolean undefined null
+            直接赋值  stack栈中
+        （2）引用值 heap
+            function object array regexp  date
+    */
+
+    // var reverseNum = function () {
+    //     var numStr = window.prompt('input');
+    //     console.log(numStr);
+    //     console.log(typeof(numStr))
+    // }
+    function addEvent(elem, handle) {
+        if(elem.addEventListener){
+            elem.addEventListener('click', handle, false);
+        }else {
+            elem.attachEvent('onclick', handle);
+        }
+    }
+
+
+    var a = document.getElementsByClassName('main')[0];
+    addEvent(a, function () {
+        alert('你好');
+    });
+
+    function getStyle(elem, styleProp) {
+        if(elem.currentStyle){
+            return elem.currentStyle[styleProp];
+        }else{
+            return getComputedStyle(elem, null)[styleProp];
+        }
+    }
+    </script>
+</body>
+</html>

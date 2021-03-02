@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>深度克隆</title>
+</head>
+<body>
+    
+    <script>
+    var obj = {
+        name: null,
+        age: 20,
+        play: ['a', 'b'],
+        sun: {
+            name1: 'Sun',
+            place: 'Han',
+            a: {
+                aa: 'aa'
+            }
+        }
+    }
+    var obj1 = {};
+    function deepClone(origin, target){
+        var target = target || {}, // 优化，防止用户不传值，或只传一个值
+            toStr = Object.prototype.toString, // 用来判断是数组还是对象
+            arrStr = '[object Array]';
+        for(var prop in origin) {
+            if(origin.hasOwnProperty(prop)){ // 判断属性是否属于自己，不是原型上的
+
+                if(origin[prop] !== null && typeof(origin[prop]) == 'object'){
+                    // if(toStr.call(origin[prop]) == arrStr){
+                    //     target[prop] = [];
+                    // }else{
+                    //     target[prop] = {};
+                    // }
+                    target[prop] = toStr.call(origin[prop]) == arrStr ? [] : {};
+                    deepClone(origin[prop], target[prop]);
+                }else{
+                    target[prop] = origin[prop];
+                }
+            }
+        }
+        return target;
+    }
+    deepClone(obj, obj1);
+
+    function deepClone(origin, target){
+        var target = target || {},
+            toStr = Object.prototype.toString,
+            arrStr = "[object Array]";
+    }
+    </script>
+
+</body>
+</html>

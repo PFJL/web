@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dom 继承树</title>
+</head>
+<body>
+    <div>
+        <span></span>
+        <a href=""></a>
+        <p></p>
+        <strong></strong>
+    </div>
+    <script>
+        var div = document.getElementsByTagName('div')[0];
+        var a = document.getElementsByTagName('a')[0];
+        var p = document.getElementsByTagName('p')[0];
+        Element.prototype.insertAfter = function (newele, origin) {
+            var afterNode = origin.nextElementSibling;
+            if(afterNode == null){
+                this.appendChild(newele);
+            }else{
+                this.insertBefore(newele, afterNode);
+            }
+        }
+        /*
+    <!-- 
+        1、document、HTMLDocument、Document之间的（继承）关系
+            document --》 HTMLDocument.prototype -- 》 Document.prototype
+            HTMLDocument.prototype = {
+
+                __proto__: Document.prototype
+            }
+            document 是HTMLDocument构造出来的
+        
+        2、增 appendChild() -- 剪切操作 相当于push
+            （1）创建元素节点
+                var div = document.createElement('div');
+                document.body.appendChild(div);
+                // 创建元素，并将元素放到HTML中
+
+            （2）创建文本节点
+                var text = document.createTextNode('我是文本node');
+            
+            （3）创建注释节点
+                document.createComment();
+            
+        3、插入
+            （1）appendChild(); 剪切操作
+
+            （2）insertBefore(a, b); // 在b前插入a
+
+        4、删
+            （1）parent.removeChild(); // 谋杀，剪切掉
+            （2）child.remove(); // 自杀，销毁什么也没有返回
+        
+        5、parentNode.replaceChild(new, old); // 替换
+
+        6、元素节点属性
+            （1）innerHTML获取元素节点里面的内容
+                div.innerHTML = '123';
+                div.innerHTML += '456';
+
+            （2）innerText // 老版本火狐没有（ textContent）
+
+            （3）className 可读写元素class
+        
+        7、元素节点方法
+            （1）setAttribute(); // 设置行间属性的值
+            （2）getAttribute(); // 取行间属性的值
+     -->
+     */
+    </script>
+
+     <script>
+    
+    // 1、创建div sapn元素并插入
+    // var div1 = document.createElement('div');
+    // document.body.appendChild(div1);
+
+    // var p1 = document.createElement('p');
+    // div1.appendChild(p1);
+
+    // // div1.setAttribute('class', 'example');
+    // // p1.setAttribute('class', 'slogan');
+    // div1.className = 'example';
+    // p1.className = 'slogan';
+    // p1.innerHTML = '姬成， cool';
+    
+    // var firstTime = new Date().getTime();
+    // for(var i = 0; i < 100000000; i++){}
+    // var lastTime = new Date().getTime();
+    // console.log(lastTime - firstTime);
+
+     </script>
+</body>
+</html>

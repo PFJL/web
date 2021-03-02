@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对象</title>
+</head>
+<body>
+    <script>
+        /*
+        
+        1、探索任何东西，都应该符合一个原则：先看怎么操作、再看怎么构成
+            操作：增、删、改、查
+
+            var myDemo = {
+                name: "demo",
+                age: 20,
+                sex: "male",
+                health: 100,
+                thePlay: function () {
+                    // 方法
+                    console.log('Running');
+                    this.health ++; // this 代表自己
+                }
+            }
+            
+            // 增
+            myDeng.wife = "xiaoliu"
+
+            // 删
+            delete(myDeng.wife);
+            myDeng.wife   // 输出 undefined
+
+            （1）变量未定义就输出，会报错，但对象属性没有定义就输出和typeof不会报错，输出undefined
+            （2）typeof(a)  // 输出 undefined
+            （3）this代表自己
+
+        2、对象的创建方法
+            （1）var obj = {}    plainObject  ： 对象字面量/对象直接量
+
+            （2）构造函数创建方法：符合大驼峰式命名规则  TheFirstName
+                1）系统自带的构造函数  Object()  ： 批量的生产对象，每个对象都长得一样，但都彼此独立
+                    var obj = new Object();
+
+                    var obj = new Object();
+                    obj.name = 'abc';
+                    obj.sex = 'male';
+                    obj.say = function () {
+
+                    }
+
+                2）自定义：符合大驼峰式命名规则  TheFirstName
+                    
+                    function Person() {
+                        
+                    }
+                    var person1 = new Person();
+                    
+                    function Car(color) {
+                        this.color = color;
+                        this.name = 'BMW';
+                        this.height = '1400';
+                        this.weight = '400';
+                    }
+                    var car1 = new Car('red');
+                    var car2 = new Car();
+
+                    function Students(name, age, sex){
+                        this.name = name;
+                        this.age = age;
+                        this.sex = sex;
+                    }
+                    var stu1 = new Students('xiaoming', 20, 'male');
+                    var stu2 = new Students('xiaohong', 19, 'female');
+                    var obj = {
+                        stu1: stu1,
+                        stu2: stu2
+                    }
+
+        3、构造函数内部原理  new
+            （1）在函数体最前面隐式的加上 var this = {}
+            （2）执行this.xxx = xxx;
+            （3）隐式的返回 return this
+                    如果想捣乱，让它显示的return
+                    如果return 的是原始值，系统会自动忽略掉，强制性返回对象this.
+                    构造函数，有new就不可能返回原始值。
+                    return 123; // 无效，还是返回this
+
+                    如果是 引用值，则会返回显示的引用值
+                        return {}; // 有效
+                        return []; // 有效
+
+            function Students(name, age, sex){
+
+                // 在函数体最前面隐式的加上 
+                // var this = {}
+
+                this.name = name;
+                this.age = age;
+                this.sex =  sex;
+
+                // 隐式的返回 return this
+            }
+            Students.AO { 
+                // 当构造函数执行前一刻，会创建AO对象，
+                // 有一个this的对象声明（相当于函数声明）
+                this: {
+                    name: name,
+                    age: age,
+                    sex: sex
+                }
+            }
+
+        4、包装类string number boolean 
+            undefined和null没有包装类
+            原始值，没有属性，如果硬要给加上一个属性，它会经过包装类，但用完就立即销毁
+                相当于没有，你可以访问，但都是undefined  除了length外
+            var str = 'abcd';
+            console.log(str.length);  // 输出 4
+
+            str.length = 2;    // 经过包装类 new String(str.length = 2) 销毁
+            console.log(str.length); // 输出4  相当于访问 new String(str.length)
+
+            str.name = 'hello';  // new String(str.name = 'hello')  用完就销毁
+            console.log(str.name); // 输出 undefined 相当于访问 new String(str.name)
+
+        */
+        
+        var x = 1,
+            y = z = 0;
+        function add(n) {
+            return n = n + 1;
+        }
+        y = add(x);
+        function add(n) {
+            return n = n + 3;
+        }
+        z = add(x);
+        console.log(x, y, z); // 输出 1 4 4
+
+        function Person() {
+            this.name = 'abc';
+            var name;
+            document.write(name);
+        }
+        // var person = Person();
+
+        
+        console.log(parseInt(3, 8));    // 还是 3
+        console.log(parseInt(3, 2));   // 不能表示 就是输出 NaN
+        console.log(parseInt(3, 0));  // 进制位写 0 的话，相当于没写，会原封不动的返回 3
+
+    </script>
+</body>
+</html>

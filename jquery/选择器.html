@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>选择器</title>
+  <script src="./jquery-3.5.1/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+  <div id="demo">
+    <div class="box1">
+      <h2>选择元素</h2>
+      <p>jQuery选择器</p>
+      <p class="text">jQuery特有选择规则</p>
+    </div>
+  </div>
+  <script>
+    /*
+    一、选择元素
+    jQuery对选择出的一组元素一起处理，省略循环，这里js是不允许的
+    1. CSS选择器
+    2. 原生DOM
+    3. jQuery对象
+    4. null/undefined
+    5. 函数function(){}，会将函数执行一遍
+    6. selector/content，可以在jquery方法里添两个参数，(元素,执行期上下文)
+    */
+
+    /*
+    1. CSS选择器
+      !important   infinity
+      行间样式      1000
+      id            100
+      class|属性|伪类 10
+      标签|伪元素     1
+      *通配符         0
+    */
+    
+    var demo = document.getElementById('demo');
+    $(function(){
+      console.log($(null))
+      console.log($(undefined));
+      console.log($('p', '.div'))
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件对象</title>
+</head>
+<body>
+    <!-- 事件对象 -->
+    <!-- <div style="width:100px;height:100px;background-color:red"></div> -->
+
+
+
+    <!-- 事件委托 -->
+    
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+    </ul>
+
+
+    <script>
+        //  <!-- 要求：点哪个li就输出哪个li的内容 -->
+        //  <!-- 常规写法 -->
+        // var liCli = document.getElementsByTagName('li');
+        // var len = liCli.length;
+        // for(var i = 0; i < len; i ++){
+        //     liCli[i].onclick = function () {
+        //         console.log(this.innerText);
+        //     }
+        // }
+
+        // 高级写法：事件委托
+        var ul =document.getElementsByTagName('ul')[0];
+        ul.onclick = function (e) {
+            var event = e || window.event;
+            var target = event.target || event.srcElement; // 获取事件源
+            console.log(target.innerText);
+        }
+
+
+        // var div = document.getElementsByTagName('div')[0];
+        // div.onclick = function (e) {
+        //     var event = e || window.event;
+        //     console.log(event);
+        // }
+
+        
+    
+    /*
+    
+    一、事件对象:
+        我们浏览器会把它打包成对象，传到咱们的参数里面，但是只有
+        在非IE浏览器才会，如果是IE浏览器e就会失效，但ie它也会记录，
+        在window.event下记录。因此，我们就需要写兼容
+
+        1、event || window.event;
+
+        2、事件源对象：用来记录谁触发了该事件，冒泡\捕获
+            （1）event.target   火狐只有这个
+
+            （2）event.srcElement  IE只有这个
+
+            （3）google Chrome  这两个都有
+
+            （4）兼容方法：
+                div.onclick = function (e) {
+                    var evnet = e || window.event;
+                    var target = event.target || event.srcElement;
+                    console.log(target); // 输出事件源对象
+                }
+    
+    二、事件委托：
+        
+    
+    */    
+        
+    </script>
+</body>
+</html>

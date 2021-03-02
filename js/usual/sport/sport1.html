@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>运动：匀速运动</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .box1{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 100px;
+            height: 100px;
+            background: orange;
+        }
+        .btn1{
+            margin-top: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+    <button class="btn1">Run Toggle</button>
+    <button class="btn1_back">Back Start</button>
+    <button class="btn1_back_run">Run Back</button>
+    <button class="btn1_stop">Run Stop</button>
+    <script>
+    /*
+    1、运动：物体状态发生连续性的变化
+    
+    */
+    var oDiv1 = document.getElementsByClassName('box1')[0];
+    var oBtn1 = document.getElementsByClassName('btn1')[0];
+    var oBtn1_back = document.getElementsByClassName('btn1_back')[0];
+    var oBtn1_back_run = document.getElementsByClassName('btn1_back_run')[0];
+    var oBtn1_stop = document.getElementsByClassName('btn1_stop')[0];
+    var timer1 = null;
+    var key1 = true;
+    oBtn1.onclick = function () {
+        if(key1){
+            startMove(oDiv1);
+            key1 = false;
+        }else{
+            clearInterval(timer1);
+            key1 = true;
+        }
+    }
+    oBtn1_back.onclick = function () {
+        clearInterval(timer1);
+        oDiv1.style.left = 0 + "px";
+        key1 = true;
+    }
+    oBtn1_back_run.onclick = function () {
+        backMove(oDiv1);
+        key1 = true;
+    }
+    oBtn1_stop.onclick = function () {
+        clearInterval(timer1);
+        key1 = true;
+    }
+    function startMove(obj) {
+        clearInterval(timer1);
+        var iSpeed = 10;
+        timer1 = setInterval(function () {
+            obj.style.left = obj.offsetLeft + iSpeed + "px";
+        }, 30)
+    }
+    function backMove(obj) {
+        clearInterval(timer1);
+        var iSpeed = 10;
+        timer1 = setInterval(function () {
+            var a = obj.offsetLeft - iSpeed;
+            if(a >= 0 ){
+                obj.style.left = a + "px";
+            }else{
+                clearInterval(timer1);
+            }
+        }, 30);
+    }
+    </script>
+</body>
+</html>

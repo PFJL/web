@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>习题</title>
+</head>
+<body>
+    <script>
+    
+    // 练习1：
+    // function Person(name, age, sex) {
+    //     var a = 0;
+    //     this.name = name;
+    //     this.age = age;
+    //     this.sex = sex;
+    //     function sss() {
+    //         a ++;
+    //         console.log(a);
+    //     }
+    //     this.say = sss;
+    // }
+    // var oPerson = new Person();
+    // oPerson.say(); // 输出 1
+    // oPerson.say(); // 输出 2
+    // var oPerson1 = new Person();
+    // oPerson1.say(); // 输出 1
+
+    // 练习2：
+    // function test() {
+    //     console.log(typeof(arguments));
+    // }
+    // test();  // 输出 object
+
+    // 练习3：
+    // var h = function a() {
+    //     return 23;
+    // }
+    // console.log(typeof(a()));
+    // 输出：  报错 a is not a defined
+
+    // 练习3：任意给出字符串[a-z],找出第一个只出现一次的字符
+    function test(arr) {
+        // var arrtest = arr.split("");
+        var len = arr.length;
+        var flag = false;
+        for(var i = 0; i < len; i++){
+            if(!flag){
+                flag = true;
+                for(var j = 0; j < len; j++){
+                    if(i != j){
+                        if(arr[i] == arr[j]){
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(flag){
+                return arr[i];
+            }
+        }
+        if(!flag){
+            return '没有只出现一次的字符';
+        }
+    }
+    
+    </script>
+</body>
+</html>

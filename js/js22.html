@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>类数组</title>
+</head>
+<body>
+    
+    <script>
+    
+    /*
+    
+    1、arguments就是类数组
+
+    2、类数组的形式
+        var obj = {
+            "0": 'a',
+            "1": 'b',
+            "2": 'c',
+            "length": 3,
+            "push": Array.prototype.push,
+            "splice": Array.prototype.splice 
+        }
+        // 属性要为索引（数字）属性，必须有length属性，最好加上push
+        // 好处
+            Array.prototype.push = function (taret) {
+                this[this.length] = target;
+                obj.length ++;
+            }
+
+    */
+    // var obj = {
+    //     "2": 'a',
+    //     "3": 'b',
+    //     "length": 2,
+    //     "push": Array.prototype.push
+    // }
+    // obj.push('c');
+    // obj.push('d');
+
+    // 输出结果
+    // var obj = {
+    //     "2": 'c',
+    //     "3": 'd',
+    //     "length": 2,
+    //     "push": Array.prototype.push
+    // }
+    
+    // Array.prototype.push = function (taret) {
+    //     this[this.length] = target;
+    //     obj.length ++;
+    // }
+
+    // 习题1： 封装typeof
+    // 要求：typeof([]) -- array
+    //       typeof(null) -- null
+    //       typeof({}) -- object
+    //       typeof(function) -- function
+    //       typeof(new Number) -- object Number
+    //       typeof(123)  -- number
+
+    // console.log(Object.prototype.toString.call(new Number()));
+    // function type(target) {
+    //     // 判断原始值还是引用值
+    //     var kind = typeof(target);
+    //     if(kind == 'object'){
+    //         var toStrKind = Object.prototype.toString.call(target);
+    //         var template = {
+    //             "[object Array]": 'array',
+    //             "[object Object]": 'object',
+    //             "[object Number]": 'number-object',
+    //             "[object String]": 'string-object',
+    //             "[object Boolean]": 'boolean-object',
+    //             "[object Null]": 'null'
+    //         }
+    //         return template[toStrKind];
+               
+    //     }else{
+    //         return kind;
+    //     }
+    // }
+
+
+    // 习题2：数组去重，要求在原型链上编写
+    // 例如： var arr = ['a', 'a', 1, 2, 1];
+    //        去重后arr = ['a', 1, 2];
+    var arr = ['a', 'a', 1, 2, 1];
+    Array.prototype.unique = function () {
+        var temp = {},
+            arr = [],
+            len = this.length;
+        for(var i = 0; i < len; i ++){
+            if(!temp[this[i]]){
+                temp[this[i]] = true;
+                arr.push(this[i]);
+            }
+        }
+        return arr;
+    }
+
+    
+    </script>
+
+</body>
+</html>

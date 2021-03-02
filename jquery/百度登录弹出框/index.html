@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>百度登录弹出框</title>
+  <script src="./../jquery-3.5.1/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="login-btn">登录</div>
+  </header>
+  <script>
+    $(function() {
+      // css样式初始化
+      initCss();
+
+      // event初始化
+      initEvent();
+    })
+    // css样式初始化
+    function initCss() {
+      setResetCss();
+      setHeaderCss();
+    }
+    // event初始化
+    function initEvent() {
+      setLoginEvent();
+    }
+    // css样式
+    function setResetCss() {
+      $('*').css({
+        padding: 0,
+        margin: 0
+      })
+    }
+    function setHeaderCss() {
+      $('header').css({
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 80,
+        width: '100%',
+        background: '#fff',
+        boxShadow: '0 2px 2px 0 rgba(0,0,0,.2)',
+      })
+      $('.login-btn').css({
+        color: '#fff',
+        background: '#4e6ef2',
+        width: 50,
+        height: 30,
+        'line-height': '30px',
+        fontSize: 14,
+        textAlign: 'center',
+        borderRadius: 4,
+        cursor: 'pointer'
+      })
+    }
+
+    // event事件
+    function setLoginEvent() {
+      // 登录
+      $('.login-btn').one('click', function() {
+        $('body').append(`
+          <div class="modal">
+            <div class="login-form">
+              <div class="close">
+                <span>X</span>
+              </div>
+              <div class="content">
+                <div class="con-h">
+                  <img src="./loginlogo.png">
+                  <span class="login-type-tip">
+                    扫码登录
+                  </span>
+                </div>
+                <div class="con-main">
+                  <div class="code">
+                    <img class="qrcode" src="./qrcode.png">
+                    <img class="qrcodeLoginGuide" src="./qrcodeLoginGuide.png">
+                  </div>
+                  <div class="code-info">
+                    请使用<a href="#" class="code-info-tip">
+                      百度App
+                    </a>扫码登录
+                  </div>
+                  <ul class="code-nav">
+                    <li class="code-nav-item">
+                      安全
+                    </li>
+                    <li class="code-nav-item">
+                      高效
+                    </li>
+                    <li class="code-nav-item">
+                      便捷
+                    </li>
+                  </ul>
+                </div>
+                <div class="con-f">
+                  <div class="con-f-left">
+                    <div class="login-type">
+                      用户名登录
+                    </div>
+                    <div class="login-type-pass">
+                      |
+                    </div>
+                    <div class="login-type-icon">
+                      <div class="login-type-icon-item qq"></div>
+                      <div class="login-type-icon-item wb"></div>
+                      <div class="login-type-icon-item wx"></div>
+                    </div>
+                  </div>
+                  <a class="con-f-right">
+                    立即注册
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `)
+        $('.modal').css({
+          position: 'absolute',
+          zIndex: 1000,
+          left: 0,
+          top: 0,
+          right: 0,
+          bottom: 0,
+          background: "rgba(0, 0, 0, .5)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        })
+        $('.login-form').css({
+          background: '#fff',
+          width: 356,
+          border: "1px solid #eee"
+        })
+        $('.login-form .close').css({
+          fontSize: 18,
+          padding: '0 10px',
+          color: '#aaa',
+          textAlign: 'right',
+          lineHeight: '40px'
+        })
+        $('.login-form .close span').css({
+          cursor: "pointer"
+        }).click(function() {
+          $('.modal').css({
+            display: 'none'
+          })
+        })
+        // content .con-h
+        $('.login-form .content .con-h').css({
+          display: "flex",
+          marginBottom: 15
+        })
+        $('.login-form .content .con-h img').css({
+          marginLeft: 28,
+        })
+        $('.login-form .content .con-h .login-type-tip').css({
+          display: "inline-block",
+          fontSize: 16,
+          height: 32,
+          lineHeight: "46px",
+          color: "#000",
+          marginLeft: 12
+        })
+        // content con-main
+        $('.login-form .content .con-main').css({
+          paddingTop: 24,
+        })
+        $('.login-form .content .con-main .qrcode').css({
+          border: "1px solid #ecedee",
+          height: 156,
+          boxSizing: "border-box",
+          marginLeft: 39
+        })
+        $('.login-form .content .con-main .qrcodeLoginGuide').css({
+          height: 156
+        })
+        $('.login-form .content .con-main .code-info').css({
+          paddingTop: 20,
+          fontSize: 16,
+          textAlign: "center"
+        })
+        $('.login-form .content .con-main .code-info-tip').css({
+         textDecoration: "none",
+         color: "#2e82ff"
+        })
+        $('.login-form .content .con-main .code-nav').css({
+          marginLeft: 15,
+          display: "flex",
+        })
+        $('.login-form .content .con-main .code-nav-item').css({
+          listStyle: "none",
+          width: "33%",
+          color: "#999",
+          fontSize: 12,
+        })
+        $('.login-form .content .con-f').css({
+          marginTop: 40,
+          height: 60,
+          lineHeight: "60px",
+          color: "#2e82ff",
+          fontSize: 14,
+          background: "#f0f6ff",
+          padding: "0 28px",
+          position: "relative",
+          display: "flex",
+          justifyContent: "space-between"
+        })
+        $('.login-form .content .con-f .con-f-left').css({
+          display: "flex"
+        })
+        $('.login-form .content .con-f .con-f-left .login-type').css({
+          cursor: "pointer",
+          width: 80
+        }).click(function() {
+          if($(this).text() === "用户名登录"){
+            $(this).html("扫码登录")
+            $('.con-h .login-type-tip').html("用户名登录")
+            $('.con-main').css({
+              display: "none"
+            })
+          }else {
+            $(this).html("用户名登录")
+            $('.con-h .login-type-tip').html("扫码登录")
+            $('.con-main').css({
+              display: "block"
+            })
+          }
+        })
+        $('.login-form .content .con-f .con-f-left .login-type-pass').css({
+          fontSize: 8,
+          padding: "0 10px"
+        })
+        $('.login-form .content .con-f .con-f-left .login-type-icon').css({
+          display: "flex",
+          alignItems: "center"
+        })
+        $('.login-form .content .con-f .con-f-left .login-type-icon .login-type-icon-item').css({
+          width: 20,
+          height: 18,
+          cursor: "pointer"
+        })
+        $('.login-form .content .con-f .con-f-left .login-type-icon .qq').css({
+          background: "url(https://passport.baidu.com/passApi/img/loginv4.png)",
+          backgroundPositionX: "-6px",
+          backgroundPositionY: "-55px"
+        })
+        $('.login-form .content .con-f .con-f-left .login-type-icon .wb').css({
+          background: "url(https://passport.baidu.com/passApi/img/loginv4.png)",
+          backgroundPositionX: "-55px",
+          backgroundPositionY: "-33px"
+        })
+        $('.login-form .content .con-f .con-f-left .login-type-icon .wx').css({
+          background: "url(https://passport.baidu.com/passApi/img/loginv4.png)",
+          backgroundPositionX: "-29px",
+          backgroundPositionY: "-32px"
+        })
+        $('.login-form .content .con-f .con-f-right').css({
+          cursor: "pointer"
+        })
+      })
+      $('.login-btn').on('click', function() {
+        $('.modal').css({
+          display: "flex"
+        })
+      })
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>重力场</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        div{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 100px;
+            height: 100px;
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+    
+        var oDiv = document.getElementsByTagName('div')[0];
+        oDiv.onclick = function () {
+            startMove(this);
+        }
+        function startMove(obj) {
+            clearInterval(obj.timer);
+            var iSpeedX = 1;
+            var iSpeedY = 10;
+            var g = 10; // 重力
+            obj.timer = setInterval(function () {
+                iSpeedY += g;
+                var newLeft = obj.offsetLeft + iSpeedX;
+                var newTop = obj.offsetTop + iSpeedY;
+                if(newTop >= window.innerHeight - obj.offsetHeight){
+                    iSpeedY *= -1;
+                    
+                    // 碰撞Y方向能量损耗
+                    iSpeedY *= 0.8;
+                    iSpeedX *= 0.8;
+
+                    newTop = window.innerHeight - obj.offsetHeight;
+                }
+                if(newTop <= 0){
+                    iSpeedY *= -1;
+
+                    // 碰撞能量损耗
+                    iSpeedY *= 0.8;
+                    iSpeedX *= 0.8;
+                    newTop = 0;
+                }
+                if(newLeft >= window.innerWidth - obj.offsetWidth){
+                    iSpeedX *= -1;
+
+                    // 碰撞能量损耗
+                    iSpeedY *= 0.8;
+                    iSpeedX *= 0.8;
+
+                    newLeft = window.innerWidth - obj.offsetWidth;
+                }
+                if(newLeft <= 0){
+                    iSpeedX *= -1;
+
+                    // 碰撞能量损耗
+                    iSpeedY *= 0.8;
+                    iSpeedX *= 0.8;
+                    newLeft = 0;
+                }
+                obj.style.left = newLeft + 'px';
+                obj.style.top = newTop + 'px';
+            }, 30)
+        }
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件分类</title>
+</head>
+<body>
+    <div style="position:absolute;left:0;top:0;width:100px;height:100px;background-color:red"></div>
+    <script>
+    // 拖拽事件
+     var div = document.getElementsByTagName('div')[0];
+    // var disX,
+    //     disY;
+    // div.onmousedown = function (e) {
+    //     disX = e.pageX - parseInt(div.style.left);
+    //     disY = e.pageY - parseInt(div.style.top);
+    //     document.onmousemove = function (e) {
+    //         var event = e || window.event;
+    //         div.style.left = event.pageX - disX + "px";
+    //         div.style.top = event.pageY - disY + "px";
+    //     }
+    //     document.onmouseup = function (e) {
+    //         document.onmousemove = null;
+    //     }
+
+    // }
+    function addEvent(elem, type, handle) {
+            if(elem.addEventListener){
+                elem.addEventListener(type, handle, false);
+            }else if(elem.attachEvent){
+                elem.attachEvent('on' + type, function () {
+                    handle.call(elem);
+                });
+            }else{
+                elem['on' + type] = handle;
+            }
+        }
+        
+    function drag(elem) {
+        var disX,
+        disY;
+        elem.onmousedown = function (e) {
+            disX = e.pageX - parseInt(div.style.left);
+            disY = e.pageY - parseInt(div.style.top);
+            document.addEventListener
+            document.onmousemove = function (e) {
+                var event = e || window.event;
+                elem.style.left = event.pageX - disX + "px";
+                elem.style.top = event.pageY - disY + "px";
+            }
+            document.onmouseup = function (e) {
+                document.onmousemove = null;
+            }
+        }
+    }
+    
+        
+    /*
+    一、事件分类
+        1、鼠标事件
+            （1）click ：敲击事件  =  mousedown + mouseup
+            （2）mousedown
+            （3）mouseup
+            click 、 mousedown 、 mouseup三者的执行顺序：按触发顺序
+                先mousedown 再 mouseup 再click
+            
+            （4）mousemove ：鼠标移动事件
+
+        2、鼠标事件
+            （1）mouseenter : 鼠标移入   mouseover
+            （2）mouseleave : 鼠标移出   mouseout
+            （3）contextmenu  : 右键菜单事件
+
+        3、如何区分鼠标的左右键 0 / 1 / 2
+            只有：mouseup   和 mousedown  能实现
+
+            document.onmousedown = function (e) {
+                var event = e || window.event;
+                if(event.button == 2){
+                    console.log('right');
+                }else if(event.button == 0){
+                    console.log('left');
+                }
+            }
+        
+        4、如何判断是拖拽事件，还是点击事件
+            （1）通过时间差来判断
+
+
+    */
+    var firstTime = 0,
+        lastTime = 0;
+    var key = false;
+    document.onmousedown = function () {
+        firstTime = new Date().getTime();
+    }
+    document.onmouseup = function () {
+        lastTime = new Date().getTime();
+        if(lastTime - firstTime < 300){
+            key = true;
+        }
+    }
+    document.onclick = function () {
+        if(key){
+            console.log('click');
+            key = false;
+        }
+    }
+        
+    </script>
+</body>
+</html>

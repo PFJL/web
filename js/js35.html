@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .wrapper{
+        width: 300px;
+        height: 300px;
+        background-color: red;
+    }
+    .content{
+        width: 200px;
+        height: 200px;
+        background-color: green;
+    }
+    .box{
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <div class="box"></div>
+        </div>
+    </div>
+    <script>
+
+        var wrapper = document.getElementsByClassName('wrapper')[0];
+        var content = document.getElementsByClassName('content')[0];
+        var box = document.getElementsByClassName('box')[0];
+
+        wrapper.addEventListener('click', function () {
+            console.log('wrapperBubble');
+        }, false);
+        content.addEventListener('click', function () {
+            console.log('contentBubble');
+        }, false);
+        box.addEventListener('click', function (e) {
+            console.log('boxBubble');
+            stopBubble(e);
+        }, false);
+
+        wrapper.addEventListener('click', function (e) {
+            console.log('wrapper');
+            console.log(e);
+        }, true);
+        // content.addEventListener('click', function () {
+        //     console.log('content');
+        // }, true);
+        // box.addEventListener('click', function () {
+        //     console.log('box');
+        // }, true);
+    
+    /*
+    
+    一、事件处理模型：点击谁，谁就是事件执行
+        1、事件冒泡：
+            结构上（非视觉上），嵌套关系的元素，会存在事件冒泡
+            的功能，即同一事件，自子元素冒泡向父元素。（自里向外）
+        
+        2、事件捕获：
+            结构上（非视觉上），嵌套关系的元素，会存在事件冒泡
+            的功能，即同一事件，自父元素冒泡向子元素。
+            （1）只有google chrome 实现了，IE没有捕获事件，
+                最新版本的火狐也有
+
+            （2）一个对象的一个事件类型，只能遵循一种事件模型，
+                不是冒泡就是捕获
+            
+            （3）如何触发事件捕获模型：false 变为 true
+                将dom.addEventListener('click', function () {
+
+                  }, true);
+
+                // 执行顺序和事件冒泡相反，自外向里
+
+            （4）另一种事件捕获：只有ie能用，比较老的正常不用
+                  dom.setCapture();
+                  dom.releaseCapture(); // 释放
+    
+        3、触发顺序：先捕获，后冒泡。
+           事件执行顺序：谁在前，谁先执行
+
+        4、有些特殊事件没有冒泡：
+            focus   blur  change   submit  reset  select
+
+
+    二、取消冒泡
+        1、有些时候我们并不希望事件冒泡，因为我们对子元素绑定事件
+            点击，也会触发父级元素事件。
+        
+        2、W3C标准 event.stopPropagation();但不支持ie9以下版本
+            event.cancelBubble = true; // ie和chrome有
+
+            document.onclick = function () {
+                console.log('你闲的呀');
+            }
+            var div = document.getElementByTagName('div')[0];
+            div.onclick = function (e) {
+                e.stopPropagation();
+            }
+        
+        3、封装stopBubble(event);实现取消冒泡
+            function stopBubble(event) {
+                if(event.stopPropagation){
+                    event.stopPropagation();
+                }else{
+                    event.cancelBubble = true;
+                }
+            }
+
+            div.onclick = function (e) {
+                e.stopBubble();
+            }
+
+    三、阻止默认事件
+        1、默认事件： 表单提交、a标签跳转、右键菜单等
+
+        2、return false;  以对象属性的方式注册的事件才生效；
+            document.oncontextmenu = function () {
+                console.log('a');
+                return false;
+            }
+
+            <a href="javascript:void(false)">https://www.baidu.com</a>
+            // 协议限定符
+
+        3、event.preventDefault();  W3C标准，IE9以下不兼容
+
+        4、event.returnValue = false;   兼容IE
+            document.oncontextmenu = function (e) {
+                console.log('a');
+                e.returnValue = false;
+            }
+
+        5、封装阻止默认事件的函数 cancelHandler(event);
+            document.oncontextmenu = function (e) {
+                console.log('a');
+                cancelHandler(e);
+            }
+            function cancelHandler(event) {
+                if(event.preventDefault) {
+                    event.preventDefault();
+                }else{
+                    event.returnValue = false;
+                }
+            }
+            
+
+    */
+    
+    
+        
+    </script>
+</body>
+</html>

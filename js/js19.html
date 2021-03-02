@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    
+    1、 NaN == NaN    false
+        NaN === NaN   false
+
+        undefined == null
+        undefined < || > || = 0  false(小于|大于|等于)
+        null < || > || = 0  false(小于|大于|等于)
+
+        1 == '1'  // true
+        1 === '1' // false
+
+        // 对象和对象比较的是地址
+        {} == {}    false
+        {} === {}   false
+        [] == []    false
+        [] === []   false
+
+        var obj1 = {}
+        var obj2 = obj1;
+        obj1 == obj2    true
+        obj1 === obj2   true
+
+
+    2、this
+        （1）函数预编译过程中 this指向的是window
+
+            function test(c) {
+                // new test(), 会隐式的创建this,那么预编译里面的this指的就是
+                // var this = Object.create(test.prototype);
+                // 或者使  var this = {
+                //             __proto__: test.prototype
+                //}
+                var a = 123;
+                function b() {
+
+                }
+            }
+            test(1);
+            test.AO {
+                arguments: [1],
+                this: window,
+                c: 1,
+                a: undefined, 1,
+                b: function b() {}
+            }
+
+        （2）全局作用域GO里  this  天生指向 window
+        （3）call/apply 可以改变this指向
+            function Test() {
+                this.name = 'Ma';
+            }
+            var obj = {};
+            var test = new Test();
+            test.call(obj);
+
+        （4）谁调用这个方法，这个方法里面的this指的就是谁
+            var obj = {
+                a: function() {
+                    console.log(this.name);
+                },
+                name: 'abc'
+            }
+            obj.a(); // 输出 abc
+
+    3、arguments.callee   表示调用自身
+       function test() {
+           arguments.callee指的就是test
+       }
+
+       // 立即执行函数，递归用法，就可以通过arguments.callee调用自身
+       var initNum = (function (n){
+
+            if(n == 1){
+                return 1;
+            }
+            return n * arguments.callee(n - 1);
+
+       }(5))
+
+       习题：
+       function test() {
+           console.log(arguments.callee); // 输出 test
+           function demo() {
+               console.log(arguments.callee); // 输出 demo
+           }
+           demo();
+       }
+       test();
+    
+    4、caller 表示谁被调用的环境
+       function test() {
+           demo();
+       }
+       function demo() {
+           console.log(demo.caller); // 输出 test
+       }
+
+    5、克隆：深度克隆
+       
+    */
+    // 习题1：
+    // var foo = '123';
+    // function print() {
+    //     var foo = '456';
+    //     this.foo = 'aaa';
+    //     console.log(foo);
+    // }
+    // print();   // 输出 456
+
+    // 习题2：
+    // var name = '222';
+    // var a = {
+    //     name: '111',
+    //     say: function() {
+    //         console.log(this.name);
+    //     }
+    // }
+    // var fun = a.say;
+    // fun();  // 输出 222
+    // a.say(); // 输出 111
+    // var b = {
+    //     name: '333',
+    //     say: function(fun) {
+    //         fun();
+    //     }
+    // }
+    // b.say(a.say); // 输出 222
+    // b.say = a.say;
+    // b.say();  // 输出 333
+
+    // function test() {
+    //     console.log(arguments.callee);  // 输出 test
+    //     function demo() {
+    //         console.log(arguments.callee); // 输出 demo
+    //     }
+    //     demo(); 
+    // }
+    // test();
+    
+    // 练习1：
+    // var foo = 123;
+    // function print() {
+    //     this.foo = 234;
+    //     console.log(foo);
+    // }
+    // new print(); // 输出 123
+
+
+    // 练习2：
+    // var a = 5;
+    // function test() {
+    //     a = 0;
+    //     console.log(a);
+    //     console.log(this.a);
+    //     var a;
+    //     console.log(a);
+    // }
+    // test();  // 输出 0 5 0
+    // new test(); // 输出 0 undefined 0
+    
+
+    // 练习3：
+    // var a = 1;
+    // var b = '1';
+    // console.log(a === b);  // 输出 false
+
+    // 练习4：
+    // var bar = { a: '002' };
+    // function print() {
+    //     bar.a = 'a';
+    //     Object.prototype.b = 'b';
+    //     return function inner() {
+    //         console.log(bar.a);
+    //         console.log(bar.b);
+    //     }
+    // }
+    // print()(); // 输出 a b
+
+    // 练习5：深度克隆
+    var obj = {
+        name: 'Mar',
+        age: 20,
+        play: ['a', 'b'],
+        sun: {
+            name1: 'Sun',
+            place: 'Han',
+            a: {
+                aa: 'aa'
+            }
+        }
+    }
+    var obj1 = {};
+    
+    function deepClone(origin, target) {
+        var target = target || {};
+        var prop,
+            flag,
+            arrFlag,
+            objFlag;
+        for(prop in origin){
+            var Tprop = target[prop],
+                Oprop = origin[prop];
+            arrFlag = Oprop instanceof Array;
+            objFlag = Oprop instanceof Object;
+            flag = arrFlag || objFlag;
+            console.log(flag);
+            if(!flag){
+                target[prop] = origin[prop]; 
+            } else {
+                if(arrFlag){
+                    target[prop] = [];
+                    // var i;
+                    // for(i = 0; i < origin[prop].length; i ++){
+                    //     target[prop].push(origin[prop][i]);
+                    // }
+                }
+                else if(objFlag){
+                    target[prop] = {};
+                    // var key;
+                    // for(key in origin[prop]){
+                    //     target[prop][key] = origin[prop][key];
+                    //     // console.log(origin[prop][key]);
+                    // }
+                }
+                deepClone(origin[prop], target[prop]); 
+            }
+        }
+        return target;
+    }
+    deepClone(obj, obj1);
+
+    </script>
+</body>
+</html>

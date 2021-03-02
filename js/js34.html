@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <!-- <ul>
+        <li>a</li>
+        <li>a</li>
+        <li>a</li>
+        <li>a</li>
+    </ul> -->
+    <script>
+        var liDemo = document.getElementsByTagName('li');
+        var len = liDemo.length;
+        // for(var i = 0; i < len; i++){
+        //     (function(j) {
+        //         liDemo[j].addEventListener("click", function() {
+        //             console.log(j);
+        //         }, false);
+        //     }(i))
+        // }
+        var ulDemo = document.getElementsByTagName('ul')[0];
+        ulDemo.onclick = function(e) {
+            var event = e || window.event;
+            var target = event.target || event.srcElement;
+            console.log(target);
+        }
+    </script>
+    <!-- <script>
+        var li = document.getElementsByTagName('li');
+        var len = li.length;
+        for(var i = 0; i < len; i ++){
+            (function (j) {
+                li[j].addEventListener('click', function () {
+                    console.log(j);
+                }, false)
+            }(i))
+            
+        }
+    /*
+    
+    一、事件：一旦事件绑定在循环里面，就要考虑是否会触发闭包
+            触发闭包，可以通过立即执行函数解决
+        1、事件：是实现交互体验的核心功能
+            （1）dom.onclick = function () {}
+                都适用兼容性好
+
+            （2）dom.addEventListener(事件, function () {
+                    // 事件触发执行体，多个事件监听，就可以执行多次，不管一不一样
+                }, false)
+
+                // IE9以下不兼容
+
+            （3）dom.attachEvent('on' + 事件, function () {
+                    // 事件触发执行体
+                })
+                // IE独有
+
+        2、事件运行环境问题：this
+        （1）dom.onclick = function () {
+                console.log(this);  // 输出dom自己
+            }
+
+        （2）dom.addEventListener('click', function () {
+                console.log(this); // 输出 dom自己
+            }, false);
+
+        （3）dom.attachEvent('onclick', function () {
+                console.log(this); // 输出 window
+            })
+
+            // 只有这个特殊，解决办法：利用call/apply改变this指向
+            dom.attachEvent('onclick', function () {
+                handle.call(dom);
+            });
+            function handle() {
+                // 事件处理程序
+                console.log(this); // 这样this就指向dom自己了
+            }
+
+        3、封装addEvent(elem, type, handle);方法，让所有的事件都好使
+            function addEvent(elem, type, handle) {
+                if(elem.addEventListener){
+                    elem.addEventListener(type, handle, false);
+                }else if(elem.attachEvent){
+                    elem.attachEvent('on' + type, function () {
+                        handle.call(elem);
+                    });
+                }else{
+                    elem['on' + type] = handle;
+                }
+            }
+        
+    
+    二、事件解除
+        1、dom.onclick = function () {}
+            // 属性赋值的形式，重新赋值null 就可以解除事件了
+            dom.onclick = null;
+
+        2、 dom.addEventListener('click', function () {
+               // 如果此处是用匿名函数，那就解除不掉了。
+            }, false);
+
+          （1）解除方法：
+            function test() {
+                // 事件处理函数体写在外面
+            }
+            // 绑定
+            dom.addEventListener('click', test, false);
+
+            // 解除
+            dom.removeEventListener('click', test, false);
+        
+        3、dom.attachEvent('onclick', test); // 绑定事件
+           dom.detachEvent('onclick', test); // 解除事件绑定
+        
+    
+
+
+
+    */
+
+
+    
+    </script> -->
+</body>
+</html>

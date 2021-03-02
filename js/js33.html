@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>利用scrollBy()实现简单阅读器</title>
+    <style>
+    .start{
+        position: fixed;
+        bottom: 50px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-weight: bold;
+        color: #000;
+        background-color:green;
+        opacity: 0.8;
+    }
+    .stop{
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-weight: bold;
+        color: #000;
+        background-color:red;
+        opacity: 0.8;
+    }
+    </style>
+</head>
+<body>
+    <div>
+            一、脚本化CSS
+        
+            1、读写元素css属性
+                dom.style[prop]
+                
+                （1）可读写行间样式，没有兼容性问题，碰到
+                    float这样的保留字属性，前面加css并，
+                    符合小驼峰式命名规则
+                    float  -- >  cssFloat
+    
+                （2）符合属性必须拆解，组合单词变成小驼峰式
+                    写法
+                    background-color -- >backgroundColor
+            
+            2、只读css以计算属性：getComputedStyle(dom, null);
+                var div = document.getElementsByTagName('div')[0];
+                getComputedStyle(dom, null);
+                getComputedStyle(a, b);
+                （1）a表示dom元素
+                    getComputedStyle(div, null).width  // 输出"100px"
+    
+                （2）b即第二个参数有什么作用：
+                    正常：填null就可以了。
+                    也可以填伪元素：获取伪元素属性
+                    getComputedStyle(dom, "after").width;
+    
+                （3）返回的都是绝对值，没有相对单位
+    
+                （4）IE8及IE8以下不兼容
+                    但可以使用：dom.currentStyle[prop];
+    
+                （5）封装兼容方法getStyle(elem, prop);
+                    function getStyle(elem, prop){
+                        if(window.getComputedStyle){
+                            return window.getComputedStyle(elem, null)[prop];
+                        }else{
+                            return elem.currentStyle[prop];
+                        }
+                    }
+    
+    
+        二、脚本化CSS应用
+            1、当点击div时，div里面的伪元素变黄色
+                var div = document.getElementsByTagName('div')[0];
+                div.onclick = function () {
+                    div.className = 'yellow';
+                }
+    
+                // 通过预设css样式，改变class名就可以了
+    
+            2、凡是要改变css状态的，就通过预设css样式，改变calss
+                好处：效率高，好维护
+                一、脚本化CSS
+        
+        1、读写元素css属性
+            dom.style[prop]
+            
+            （1）可读写行间样式，没有兼容性问题，碰到
+                float这样的保留字属性，前面加css并，
+                符合小驼峰式命名规则
+                float  -- >  cssFloat
+
+            （2）符合属性必须拆解，组合单词变成小驼峰式
+                写法
+                background-color -- >backgroundColor
+        
+        2、只读css以计算属性：getComputedStyle(dom, null);
+            var div = document.getElementsByTagName('div')[0];
+            getComputedStyle(dom, null);
+            getComputedStyle(a, b);
+            （1）a表示dom元素
+                getComputedStyle(div, null).width  // 输出"100px"
+
+            （2）b即第二个参数有什么作用：
+                正常：填null就可以了。
+                也可以填伪元素：获取伪元素属性
+                getComputedStyle(dom, "after").width;
+
+            （3）返回的都是绝对值，没有相对单位
+
+            （4）IE8及IE8以下不兼容
+                但可以使用：dom.currentStyle[prop];
+
+            （5）封装兼容方法getStyle(elem, prop);
+                function getStyle(elem, prop){
+                    if(window.getComputedStyle){
+                        return window.getComputedStyle(elem, null)[prop];
+                    }else{
+                        return elem.currentStyle[prop];
+                    }
+                }
+
+
+    二、脚本化CSS应用
+        1、当点击div时，div里面的伪元素变黄色
+            var div = document.getElementsByTagName('div')[0];
+            div.onclick = function () {
+                div.className = 'yellow';
+            }
+
+            // 通过预设css样式，改变class名就可以了
+
+        2、凡是要改变css状态的，就通过预设css样式，改变calss
+            好处：效率高，好维护
+            一、脚本化CSS
+        
+        1、读写元素css属性
+            dom.style[prop]
+            
+            （1）可读写行间样式，没有兼容性问题，碰到
+                float这样的保留字属性，前面加css并，
+                符合小驼峰式命名规则
+                float  -- >  cssFloat
+
+            （2）符合属性必须拆解，组合单词变成小驼峰式
+                写法
+                background-color -- >backgroundColor
+        
+        2、只读css以计算属性：getComputedStyle(dom, null);
+            var div = document.getElementsByTagName('div')[0];
+            getComputedStyle(dom, null);
+            getComputedStyle(a, b);
+            （1）a表示dom元素
+                getComputedStyle(div, null).width  // 输出"100px"
+
+            （2）b即第二个参数有什么作用：
+                正常：填null就可以了。
+                也可以填伪元素：获取伪元素属性
+                getComputedStyle(dom, "after").width;
+
+            （3）返回的都是绝对值，没有相对单位
+
+            （4）IE8及IE8以下不兼容
+                但可以使用：dom.currentStyle[prop];
+
+            （5）封装兼容方法getStyle(elem, prop);
+                function getStyle(elem, prop){
+                    if(window.getComputedStyle){
+                        return window.getComputedStyle(elem, null)[prop];
+                    }else{
+                        return elem.currentStyle[prop];
+                    }
+                }
+
+
+    二、脚本化CSS应用
+        1、当点击div时，div里面的伪元素变黄色
+            var div = document.getElementsByTagName('div')[0];
+            div.onclick = function () {
+                div.className = 'yellow';
+            }
+
+            // 通过预设css样式，改变class名就可以了
+
+        2、凡是要改变css状态的，就通过预设css样式，改变calss
+            好处：效率高，好维护
+            一、脚本化CSS
+        
+        1、读写元素css属性
+            dom.style[prop]
+            
+            （1）可读写行间样式，没有兼容性问题，碰到
+                float这样的保留字属性，前面加css并，
+                符合小驼峰式命名规则
+                float  -- >  cssFloat
+
+            （2）符合属性必须拆解，组合单词变成小驼峰式
+                写法
+                background-color -- >backgroundColor
+        
+        2、只读css以计算属性：getComputedStyle(dom, null);
+            var div = document.getElementsByTagName('div')[0];
+            getComputedStyle(dom, null);
+            getComputedStyle(a, b);
+            （1）a表示dom元素
+                getComputedStyle(div, null).width  // 输出"100px"
+
+            （2）b即第二个参数有什么作用：
+                正常：填null就可以了。
+                也可以填伪元素：获取伪元素属性
+                getComputedStyle(dom, "after").width;
+
+            （3）返回的都是绝对值，没有相对单位
+
+            （4）IE8及IE8以下不兼容
+                但可以使用：dom.currentStyle[prop];
+
+            （5）封装兼容方法getStyle(elem, prop);
+                function getStyle(elem, prop){
+                    if(window.getComputedStyle){
+                        return window.getComputedStyle(elem, null)[prop];
+                    }else{
+                        return elem.currentStyle[prop];
+                    }
+                }
+
+
+    二、脚本化CSS应用
+        1、当点击div时，div里面的伪元素变黄色
+            var div = document.getElementsByTagName('div')[0];
+            div.onclick = function () {
+                div.className = 'yellow';
+            }
+
+            // 通过预设css样式，改变class名就可以了
+
+        2、凡是要改变css状态的，就通过预设css样式，改变calss
+            好处：效率高，好维护
+            一、脚本化CSS
+        
+        1、读写元素css属性
+            dom.style[prop]
+            
+            （1）可读写行间样式，没有兼容性问题，碰到
+                float这样的保留字属性，前面加css并，
+                符合小驼峰式命名规则
+                float  -- >  cssFloat
+
+            （2）符合属性必须拆解，组合单词变成小驼峰式
+                写法
+                background-color -- >backgroundColor
+        
+        2、只读css以计算属性：getComputedStyle(dom, null);
+            var div = document.getElementsByTagName('div')[0];
+            getComputedStyle(dom, null);
+            getComputedStyle(a, b);
+            （1）a表示dom元素
+                getComputedStyle(div, null).width  // 输出"100px"
+
+            （2）b即第二个参数有什么作用：
+                正常：填null就可以了。
+                也可以填伪元素：获取伪元素属性
+                getComputedStyle(dom, "after").width;
+
+            （3）返回的都是绝对值，没有相对单位
+
+            （4）IE8及IE8以下不兼容
+                但可以使用：dom.currentStyle[prop];
+
+            （5）封装兼容方法getStyle(elem, prop);
+                function getStyle(elem, prop){
+                    if(window.getComputedStyle){
+                        return window.getComputedStyle(elem, null)[prop];
+                    }else{
+                        return elem.currentStyle[prop];
+                    }
+                }
+
+
+    二、脚本化CSS应用
+        1、当点击div时，div里面的伪元素变黄色
+            var div = document.getElementsByTagName('div')[0];
+            div.onclick = function () {
+                div.className = 'yellow';
+            }
+
+            // 通过预设css样式，改变class名就可以了
+
+        2、凡是要改变css状态的，就通过预设css样式，改变calss
+            好处：效率高，好维护
+    </div>
+    <div class="start">start</div>
+    <div class="stop">stop</div>
+
+    <script>
+    
+    var start = document.getElementsByClassName('start')[0];
+    var stop = document.getElementsByClassName('stop')[0];
+    var timer = 0;
+    var key = false;
+    start.onclick = function () {
+        if(!key){
+            timer = setInterval(function () {
+                scrollBy(0, 1);
+                key = true;
+            }, 10);
+        }
+        
+    }
+
+    stop.onclick = function () {
+        clearInterval(timer);
+        key = false;
+    }
+    
+    </script>
+</body>
+</html>

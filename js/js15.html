@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>call\apply</title>
+</head>
+<body>
+    <script>
+    
+    /*
+    
+    1、call\apply的作用：
+        call和apply的作用几乎是一样的，call必须把一个个实参传进去，而apply传的是实参数组
+        var obj = {}
+        Person.call(obj, 'aa', 12, 'male');
+        Person.apply(obj, ['aa', 12, 'male']);
+        var arr = ['aa', 12, 'male'];
+        Person.apply(obj, arr);
+
+        eg：
+            function foo() {
+                bar.apply(null, arguments);
+            }
+            function bar(x) {
+                console.log(arguments);
+            }
+            foo(1, 2, 3, 4, 5);
+
+        （1）改变this指向：借用别人的函数实现自己的功能。
+            eg1: 
+                // 任何函数或方法都可以 .call();它才是方法执行的真实面目。
+                function test(name, age) {
+                    // 没有通过call指向this,则this相当于window
+                    // window.name = name; window.age = age;
+                    this.name = name;
+                    this.age = age;
+                }
+                test();   -----> test.call(); 这两个是等价的
+            
+            eg2:
+                // 不new的话，this默认指向的是window
+                function Person(name, age) {
+                    // this == obj
+                    this.name = name;
+                    this.age = age;
+                }
+                var person = new Person('deng', 100);
+                var obj = {
+
+                }
+                Person.call(obj); // 表示，obj = this，this指向的就是obj对象了。
+                Person.call(obj, 'cheng', 20);
+                // call的第一位参数会改变this指向，第二位开始会当作实参。
+                // 输出obj 就等于 obj = {
+                                    name: 'cheng',
+                                    age: 20
+                                }
+
+            eg3:
+                function Person(name, age, sex) {
+                    this.name = name;
+                    this.age = age;
+                    this.sex = sex;
+                }
+
+                function Student(name, age, sex, tel, grade) {
+                    // 构造函数会隐式的创建 var this = {} 用来存放原型和属性。
+                    Person.call(this, name, age, sex);
+                    // 利用 Person方法实现自己功能的封装。
+
+                    this.tel = tel;
+                    this.grade = grade;
+                }
+                var student = new Student('xiaoming', 20, 'male', 1234, 2016)
+
+    2、习题：JavaScript的call和apply方法是做什么的，两者有什么区别？
+            作用：改变this指向    
+            区别：传参列表不同      
+    */
+    // 例子1：
+    // function Person(name, age, sex) {
+    //     this.name = name;
+    //     this.age = age;
+    //     this.sex = sex;
+    // }
+
+    // function Student(name, age, sex, tel, grade) {
+    //     // 构造函数会隐式的创建 var this = {} 用来存放原型和属性。
+    //     Person.call(this, name, age, sex);
+    //     // 利用 Person方法实现自己功能的封装。
+
+    //     this.tel = tel;
+    //     this.grade = grade;
+    // }
+    // var student = new Student('xiaoming', 20, 'male', 1234, 2016)
+
+    // 例子2：
+    // function Sit(c, sitColor) {
+    //     this.c = c;
+    //     this.sitColor = sitColor;
+    // }
+    // function Model(height, width, len) {
+    //     this.height = height;
+    //     this.width = width;
+    //     this.len = len;
+    // }
+    // function Wheel(wheelSize, style) {
+    //     this.wheelSize = wheelSize;
+    //     this.style = style;
+    // }
+    // function Car(wheelSize, style, height, width, len, c, sitColor) {
+    //     Sit.call(this, c, sitColor);
+    //     Model.call(this, height, width, len);
+    //     Wheel.call(this, wheelSize, style);
+    // }
+    // var car1 = new Car(100, 'abc', 2, 5, 'abc', 'c', 'red');
+
+    // 习题1：
+    // var a = 5;
+    // function test() {
+    //     a = 0;
+    //     alert(a); // 0
+    //     alert(this.a); // undefined
+    //     var a;
+    //     alert(a); // 0
+    // }
+    // new test(); // 输出 0 undefined 0
+    // test();  // 输出 0 5 0
+    // 没有new的话，this相当于window
+    
+    // var a = new Number();
+    // a.toString = function () {
+    //     return 'abc';
+    // }
+    // document.write(a);
+    </script>
+</body>
+</html>

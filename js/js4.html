@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>盒子居中：子元素的宽高已知且是块级元素</title>
+    <style>
+    /* .wrapper{
+        position: relative;
+        width: 500px;
+        height: 500px;
+        background: rgba(219, 156, 151, 0.8);
+    }
+    .contact{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -50px;
+        margin-top: -50px;
+        width: 100px;
+        height: 100px;
+        background: rgba(180, 35, 35, 0.8);
+    } */
+    /* .wrapper{
+        display: flex;
+        width: 500px;
+        height: 500px;
+        background: rgba(219, 156, 151, 0.8);
+    }
+    .contact{
+        margin: auto;
+        width: 100px;
+        height: 100px;
+        background: rgba(180, 35, 35, 0.8);
+    } */
+    /* .wrapper{
+        overflow: hidden;
+        width: 500px;
+        height: 500px;
+        background: rgba(219, 156, 151, 0.8);
+    }
+    .contact{
+        margin: auto;
+        margin-top: 200px;
+        width: 100px;
+        height: 100px;
+        background: rgba(180, 35, 35, 0.8);
+    } */
+    *{
+        margin: 0px;
+        padding: 0px;
+    }
+    .wrapper{
+        background: red;
+        height: 300px;
+        width: 300px;
+        overflow: hidden;
+    }
+    .a{
+        background: yellow;
+        height: 200px;
+        width: 200px;
+        margin-top: 100px;
+        overflow: hidden;
+    }
+    .b{
+        background: orange;
+        height: 100px;
+        width: 100px;
+        margin-top: 100px;
+    }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="a">
+            <div class="b"></div>
+        </div>
+    </div>
+</body>
+</html>

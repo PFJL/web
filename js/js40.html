@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>json</title>
+</head>
+<body>
+    <script>
+    // 1、将正常json转化成字符串json
+    // var obj = {
+    //     "name" : "deng",
+    //     "age" : 20,
+    //     "sex" : "male"
+    // }
+    
+    // var obj1 = JSON.stringify(obj);
+    // var obj2 = JSON.parse(obj1);
+        
+    /*
+    
+    一、json
+        1、json定义：
+            JSON是一种传输数据的格式（以对象为样板，本质上就是对象，但用途
+            有区别，对象是本地用的，json是用来传输的）
+
+        2、规定：属性名必须加引号，用来区分对象
+            "{
+                "name" : "deng",
+                "age" : 123
+            }"
+        
+        3、前后端数据传输都是字符串形式，只不过是json格式的字符串
+            '{"name" : "deng","age" : 123}'
+        
+        4、前端如何把正常的json和字符串的json进行转化
+        
+            JSON.parse();   string ->  json
+
+            JSON.stringify(); json -> string
+    
+    二、
+        1、绘制页面：通过js渲染引擎，一行一行的绘制页面
+            domTree         +             cssTree = randerTree
+            html
+        head     body
+                div  span
+            // 符合深度优先原则,一条枝干解析完之后，再解析其他枝干
+            // dom节点解析，看到dom就将dom添加到domTree
+        
+        2、js可以动态的改变dom结构和间接的修改css样式
+            由于randerTree是js渲染引擎绘制页面的最后依据，
+            如果dom或css变了，randerTree就得重新构建。
+        
+        3、由于重新构建randerTree会很费效率，就尽量少进行dom节点
+            的添加、删除操作
+
+            重新构建randerTree  ->  reflow重排  ：效率最低
+            哪些会触发重排：
+                dom节点 的删除，添加
+                dom节点的宽高变化，位置变化
+                display:none --->  block
+                offsetWidth   offsetLeft等
+
+            repaint  重绘：基于css一部分进行改变
+
+
+    三、异步加载js：不会影响页面里的其他东西加载
+        javascript异步加载的三种方案：
+        
+        1、defer异步加载，但要等到dom文档全部解析完才会被执行。
+            只有IE能用，也可以将代码写到内部。
+            <script type="text/javascript" src="" defer="defer"/>
+        
+        2、async异步加载，加载完就执行，async只能加载外部js,不能
+            把js写再script标签里面。非IE/IE高级版本
+            <script type="text/javascript" src="" async="async"/>
+        
+        3、第三种方法，不仅可以异步加载，也可以按需加载
+            
+            var script = document.createElement('script');
+            script.type = "text/javascript";
+            script.src = "demo.js"; // 下载
+            document.head.appendChild(script); // 解析
+
+            // test(); // 执行demo.js里面的代码
+            // 但是有可能，test()执行了，script.src还没下载完，
+            // 就会报错，因此我们需要有提示机制，告诉我们异步加载
+            // 完了，我们才去执行
+
+            （1）非IE
+                script.onload = function () { 
+                    test();
+                }
+                // onload只有等页面的内容全部加载完才会触发。
+                // 但 IE不兼容
+
+            （2）IE处理方法：通过监听readyState状态码来知道，什么
+                时候加载完
+                script.onreadystatechange = function () {
+                    if(script.readyState == "complete" || 
+                        script.readyState =="loaded"){
+                            test();
+                        }
+                }
+        4、封装函数，让浏览器都好使
+            function loadScript(url, callback) {
+                var script = document.createElement('script');
+                script.type = "text/javascript";
+                if(script.readyState) {
+                    script.onreadystatechange = function () {
+                        if(script.readyState == "complete" || script.readyState =="loaded"){
+                            callback();
+                        }
+                    }
+                }else {
+                    script.onload = function () {
+                        callback();
+                    }
+                }
+                script.src = "demo.js"; // 写在后面，是为了防止，下载速度非常块，以经下载完了就不需要监听了，所以先绑定
+                document.head.appendChild(script);
+            }
+
+
+
+    */
+    
+    function loadScript(url, callback) {
+        var script = document.createElement('script');
+        script.type = "text/javascript";
+        if(script.readyState) {
+            script.onreadystatechange = function () {
+                if(script.readyState == "complete" || script.readyState =="loaded"){
+                    callback();
+                }
+            }
+        }else {
+            script.onload = function () {
+                callback();
+            }
+        }
+        script.src = "demo.js"; 
+        document.head.appendChlid(script);
+    }
+
+    // 执行时，也可传字符串，再修改callback执行方式
+    // loadScript(url, function () {
+    //     test();
+    // })
+    </script>
+</body>
+</html>

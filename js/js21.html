@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>三目运算符 数组</title>
+</head>
+<body>
+    
+    <script>
+    // 1、三目运算符
+    // 条件判断 ? 是 : 否  并且返回值
+    // var num = 1 > 0 ? 2 + 2 : 1 + 1;
+    // console.log(num);
+
+    /*
+    1、数组
+        （1）数组的定义
+            var arr = []; // 数组字面量
+            var arr = [10]; // 数值表示 数组内容有一个10
+
+            var arr = new Array();
+            var arr = new Array(10); // 数值表示数组长度
+    
+    2、数组的方法分类：
+        es3.0（是最标准的）   es5.0（在3.0的基础上增加方法）  es6.0
+        ECMAScript   
+        DOM   通过javascript可以操作html
+        BOM   通过javascript可以操作浏览器
+
+        BOM和DOM：Brendan Eich 给出一些列标准，由各个浏览器厂商来补充方法。
+                  因此这两个在不同浏览器有细微的差别。
+                  BOM基本上是都不兼容的
+    
+    3、数组的方法：
+        可以改变原数组的：
+            push    pop   shift   unshift   sort   reverse  splice
+            （1）push
+            push：往数组的最后面添加成员，并返回数组长度
+                  var arr = [];
+                  arr.push(function a() {});
+
+                  可以添加多个数据
+                  arr.push(1, 2, 3);
+
+            （2）pop : 将数组最后一位剪切出来，没有参数
+                var arr = [1, 2, 3];
+                arr.pop();
+                console.log(arr); // 输出 [1, 2];
+
+            （3）unshift 往数组的前面添加成员,跟push用法一样
+                var arr = [1, 2, 3];
+                arr.unshift(0);
+                console.log(arr);  // 输出 [0, 1, 2, 3];
+
+                arr.unshit(-1, 0);
+                console.log(arr);  // 输出 [-1, 0, 1, 2, 3];
+
+            （4）reverse：逆转顺序
+                var arr = [1, 2, 3];
+                arr.reverse();
+                console.log(arr); // 输出 [3, 2, 1]
+
+            （5）splice：切片的意思，输出切出来的值
+                var arr = [1, 2, 3, 4, 5];
+                arr.splice(从第几位开始，截取多少长度，在切口处添加新的成员);
+                arr.splice(1, 2);
+                console.log(arr); // 输出 [1, 4, 5];
+
+                arr.splice(5, 0, 6);
+                console.log(arr); 
+                // 输出 [1, 2, 3, 4, 5, 6]; 截取0位相当于在开始的地方添加数据
+                splice = function (pos) {
+                    pos += pos > 0 ? 0 : this.length;
+                }
+
+            （6）sort给数组排序：按照asc编码排序，升序，但有些不能按我们理想的
+                样子进行排序；var a = [1, 4, 10, 2];  a.sort(); // 输出 [1, 10, 2, 4];
+                var arr = [1, 3, 2, 0];
+                arr.sort(); // 输出 [0, 1, 2, 3];
+                arr.sort().reverse(); // 输出 [3, 2, 1, 0];
+
+                1)sort虽然不不能完全按照理想的样子进行排序，但它给我们
+                    留下了一个接口，让我们可以自己定义:
+                        必须写两个形参，看返回值：
+                            * 当返回值为负数时，那么前面的数放在前面
+                            * 当返回值为正数，那么后面的数在前面
+                            * 为 0时，不动
+                    var arr = [1, 3, 5, 4, 10];
+                    arr.sort(function (a, b) {
+                        // return a - b; 升序
+                        return b - a; // 降序
+                    });
+
+
+
+        不可以改变原数组的：
+            concat()： 数组拼接在一起
+            var arr1 = [1, 2, 3];
+            var arr2 = [4, 5];
+            arr.concat(arr2);
+            
+
+            slice(起，末); // 截取数组
+            // 用处，主要是用来将类数组转换成数组的。
+            
+            // 散列
+            join(); // 连接，表示将数组的每一位通过某字符串连接起来
+                var arr = [1, 2, 3];
+                console.log(arr.join('-')); // 输出 1-2-3
+                console.log(arr.join('我是你');  // 1我是你2我是你3
+                join()里面不传参是按逗号（，）来连接的
+            
+            split(); // 按那个拆分，和join互逆的
+
+
+    */
+    // 数组原型push方法的实现
+    // var arr = [];
+    // Array.prototype.push = function () {
+    //     for(var i = 0; i < arguments.length; i ++){
+    //         this[this.length] = arguments[i];
+    //     }
+    //     return this.length;
+    // }
+
+    // 习题1：给个有序数组，随机乱序 
+    // Math.random();产生0 ~ 1之间的开区间数
+    // var arr = [1, 2, 3, 4, 5, 10];
+    // arr.sort(function (first, sceond){
+    //     return (Math.random() - 0.5);
+    // });
+
+
+    // 习题2：对象按照年龄升序排列
+    // var cheng = {
+    //     name: 'cheng',
+    //     age: 18,
+    //     sex: 'male',
+    //     face: 'handsome'
+    // }
+    // var deng = {
+    //     name: 'dneg',
+    //     age: 40,
+    //     sex: undefined,
+    //     face: 'amazing'
+    // }
+    // var zhang = {
+    //     name: 'zhang',
+    //     age: 20,
+    //     sex: 'male'
+    // }
+    // var arr = [cheng, deng, zhang];
+    // arr.sort(function (peope1, peope2) {
+    //     return peope1.age - peope2.age;
+    // })
+
+
+    // 习题3：按照字符串长度排序
+    // var arr = ['ads', 'asdfasf', 'vfdf', 'a', '22'];
+    // arr.sort(function (first, second) {
+    //     return first.length - second.length;
+    // });
+
+    // 圣杯模式：实现继承
+    // var init = (function () {
+    //     function F() {};
+    //     return function (Target, Origin) {
+    //         F.prototype = Origin.prototype;
+    //         Target.prototype = new F();
+    //         Target.prototype.constructor = Target;
+    //         Target.prototype.uber = Origin.prototype;
+    //     }
+    // }())
+
+    // 练习4：实现object类型的clone方法
+    function deepClone(origin, target) {
+        var target = target || {};
+        for(var prop in origin){
+            if(origin.hasOwnProperty(prop)){ // 判断是否是属于自己的属性，而不是原型上的
+                if(origin[prop] != null && typeof(origin[prop]) == 'object'){
+                    if(Object.prototype.toString.call(origin[prop]) == '[object Array]'){
+                        target[prop] = [];
+                    }else {
+                        target[prop] = {};
+                    }
+                    deepClone(origin[prop], target[prop]);
+                }else{
+                    target[prop] = origin[prop];
+                }
+
+            }
+        }
+        return target;
+
+    }
+    var obj1 = {
+        name: 'aa',
+        age: 12,
+        say: ['a', 'b']
+    }
+    var obj2 = {};
+    
+    </script>
+
+</body>
+</html>

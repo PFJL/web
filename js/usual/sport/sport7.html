@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        div{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 100px;
+            height: 100px;
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+    
+    var oDiv = document.getElementsByTagName('div')[0];
+    oDiv.onclick = function () {
+        // startMove(this);
+    }
+    oDiv.onmousedown = function (e) {
+        var event = e || window.event;
+        var disX = e.clientX - this.offsetLeft;
+        var disY = e.clientY - this.offsetTop;
+        var that = this;
+        document.onmousemove = function (e) {
+            var newLeft = e.clientX - disX,
+                newTop = e.clientY - disY;
+            that.style.left = newLeft + 'px';
+            that.style.top = newTop + 'px';
+        }
+        document.onmouseup = function () {
+            document.onmousemove = null;
+        }
+    }
+    oDiv.onmouseup = function () {
+        startMove(this);
+    }
+    function startMove(obj){
+        clearInterval(obj.timer);
+        var iSpeedX = 10,
+            iSpeedY = 5,
+            g = 0.98;
+
+        obj.timer = setInterval(function () {
+            iSpeedY += g;
+            var newLeft = obj.offsetLeft + iSpeedX,
+                newTop = obj.offsetTop + iSpeedY;
+            
+            if(newTop >= window.innerHeight - obj.offsetHeight){
+                iSpeedY *= -1;
+                iSpeedY *= 0.8;
+                iSpeedX *= 0.9;
+                newTop = window.innerHeight - obj.offsetHeight;
+            }
+            if(newTop <= 0){
+                iSpeedY *= -1;
+                iSpeedY *= 0.8;
+                iSpeedX *= 0.9;
+            }
+            if(newLeft >= window.innerWidth - obj.offsetWidth){
+                iSpeedX *= -1;
+                iSpeedY *= 0.8;
+                iSpeedX *= 0.9;
+                newLeft = window.innerWidth - obj.offsetWidth;
+            }
+            if(newLeft <= 0){
+                iSpeedX *= -1;
+                iSpeedY *= 0.8;
+                iSpeedX *= 0.9;
+            }
+            obj.style.left = newLeft + 'px';
+            obj.style.top = newTop + 'px';
+        }, 30)
+    }
+    </script>
+</body>
+</html>

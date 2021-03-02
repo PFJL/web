@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    /*
+    
+    一、原型
+        1、定义：原型是function 对象的一个属性，它定义了构造函数制造出
+                的对象的公共祖先。通过该构造函数产生的对象，可以继承该
+                原型的属性和方法。原型也是对象。
+
+        2、利用原型的特点和概念，可以提取公有属性。
+            Person.prototype = { // 公有属性
+                type: 'human',
+                country: 'Chinese'
+            }
+            function Person(name, age, sex) {
+                this.name = name;
+                this.age = age;
+                this.sex = sex;
+                this.hairColor = 'black'; 
+            }
+            var person1 = new Person('fireKing', 20, 'male');
+
+        3、原型的增、删、改、擦、查
+            （1）person1.constructor   // 返回的是person1的构造函数
+                可以主动更改，但有自己自定义的prototype就只会返回f Object{}
+        
+
+        4、_proto_  用来存放 构造函数.prototype
+            Person.prototype.name = 'abc';
+            function Person() {
+                
+            }
+            var person1 = new Person();
+            console.log(person1.name); 
+            // 会先在自身构造函数里面找name属性，如果找不到就会到
+            // _proto_ : Person.prototype{}里面找
+
+            （1）构造函数的创建方法
+                1）在函数体最前面隐式的加上 // 有new才会发生这个过程
+                    var this = { // 有new才会发生
+                        _proto_: Person.prototype{}
+                    }
+                2）执行this.xxx = xxx;
+                3）隐式的返回 return this;
+            
+            eg1:
+                Person.prototype.name = 'sunny';
+                function Person() {
+                    // var this = { _proto_: Person.prototype{}}
+                }
+                Person.prototype = {
+                    name: 'cherry'
+                }
+                var person = new Person();
+                console.log(person.name); // 输出 cherry
+
+
+                Person.prototype.name = 'sunny';
+                function Person() {
+                    // var this = { _proto_: Person.prototype{}}
+                }
+                var person = new Person();
+                Person.prototype = { // prototype房间换了，但_proto_房间没换
+                    name: 'cherry'
+                }
+                console.log(person.name); // 输出 sunny
+                
+            
+            
+    */
+    Person.prototype = {
+        type: 'human',
+        country: 'Chinese'
+    }
+    function Person(name, age, sex) {
+
+        // var this = { // 隐式创建
+        //      name: naem,
+        //      age: age,
+        //      sex: sex,
+        //      hairColor: 'black,
+        //      _proto_: Person.prototype = {}
+        //}
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        this.hairColor = 'black';
+    }
+    var person1 = new Person('fireKing', 20, 'male');
+    var person2 = new Person();
+
+    function Test() {
+        this.hairColor = 'black';
+    }
+    var test = new Test();
+    </script>
+</body>
+</html>

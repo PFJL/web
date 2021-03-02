@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+    /*
+    
+    一、js加载时间线
+        1、创建Document对象document，开始解析web页面，这个阶段
+            document.readyState = 'loading'
+
+        2、遇到link外部css,创建线程加载，并继续解析文档。
+
+        3、遇到script外部js，并且没有设置async、defer,
+            浏览器（同步）加载，并阻塞，等待js加载完成
+            并执行该脚本，然后继续解析文档。
+        
+        4、遇到script外部js,并设有async、defer，浏览器
+            创建新线程（异步）加载，并继续解析文档。
+            async解析完成之后立即执行，defer等文档全部
+            解析完成之后才执行。（异步禁止使用document.
+            write());）
+            因为：document.write()在一定情况下具有消除
+            之前全部分档流，正好异步加载，是如此。
+        
+        5、遇到img等，先正常解析dom结构，然后浏览器异步
+            加载src,并继续解析文档。
+
+        6、当文档解析完成，
+            document.readyState = 'interactive'
+        
+        7、文档解析完成后，所有设置的defer的脚本会按照
+            顺序执行。
+        
+        8、document对象触发DOMContentLoaded事件，程序
+            执行从同步脚本执行阶段，转化为驱动阶段。
+            DOMContentLoaded表示文档解析完成后，只有在
+            addEventListener好使
+            document.addEventListener('DOMContentLoaded', function () {
+
+            }, false);
+            
+
+        9、当所有的async的脚本加载完成并执行后、img等
+            加载完成后，document.readyState = 'complete',
+            window对象触发load事件
+        
+        10、正常方式
+
+            
+
+    
+    */
+        
+    </script>
+</body>
+</html>

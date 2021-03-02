@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript必会常用知识点</title>
+</head>
+<body>
+    <div>
+        <label for="demo">username:</label>
+        <input type="text" id="demo">
+    </div>
+    <script>
+    
+    /*
+    1、渲染模式 Doctype：（DTD）文档解析规范
+        ie6以前各浏览器发展比较封闭，基本没什么兼容性可谈。考虑到
+        以前建设的网站并不支持标准模式，所以各浏览器在加入标准模式
+        的同时也保留了混杂模式（怪异模式）。
+        (1)标准模式：document.compatMode = "CSS1Compat";
+            即文档开头有加：<!DOCTYPE html>
+        
+        (2)混杂模式（怪异模式）
+            document.compatMode = "BackCompat";
+            即文档开头没有加：<!DOCTYPE html>
+
+    2、<lable for="">标签可以用来绑定标签。
+        <div>
+            <label for="demo">username:</label>
+            <input type="text" id="demo">
+        </div>
+        解析：当你点中label标签时，input标签也会被选中。
+    
+    3、元素先天自带的属性
+        setAttribute() 可以设置元素先天没有的属性
+        getAttribute() 可以获得元素所有的属性，包括后天自己加的。
+    
+    4、img图片预加载
+        var oImg = new Image();
+        oImg.src = "";
+        oImg.onload = function () {
+            // 等图片加载完成之后执行该函数
+            document.body.appendChild(oTmg);
+        }
+    
+    5、图片懒加载（按需加载，等你浏览到的时候再加载出来）
+        var btn = document.getElementsByTagName('button')[0];
+        btn.onclick = function () {
+            var oImg = new Image();
+            oImg.src = "";
+            oImg.onload = function () {
+                document.body.appendChild(oImg);
+            }
+        }
+
+    6、Math.random()
+        (1)生成[0, 1)左闭右开的区间
+            
+        (2)Math.floor(); 向下取整
+
+        (3)Math.ceil(); 向上取整
+    
+    7、节约性能，提高效率
+        (1)文档碎片：
+        不占用dom结构,可以先将要大量插入的dom先插入
+        到文档碎片fraf中，再将文档碎片插入到想要插入的文档dom中
+        var oUl = document.getElementsByTagName('ul');
+        var fraf = document.createDocumentFragment();
+        for(var i = 0; i < 10000; i++){
+            var oLi = document.createElement('li');
+            oLi.innerHTML = i;
+            fraf.appendChild(oLi);
+        }
+        oUl.appendChild(fraf);
+
+        解析：不用每次要插入一个li就渲染一次，先将所有的li都加载完
+            一次性插入。
+
+        (2)也可以用拼接字符串的形式。
+    
+    8、cdn：缓存服务器
+        例如：双11大量用户向天猫淘宝访问服务器，
+    
+    9、断点调试：debugger;
+
+    10、在原型上封装一个getByClassName方法：兼容性更好。
+        Document.prototype.getByClassName = function (className) {
+            // 将类数组转化成数组
+            var allDomArr = Array.prototype.slice.call(document.getElementsByTagName('*'), 0);
+            var filterArr = [];
+            function dealClass(dom) {
+                var reg = /\s+/g; 
+                var arrClassName = dom.calssName.replace(reg, ' ').trim();
+                // 正则去中间空格，trim()去前后空格
+                return arrClassName();
+            }
+            allDomArr.forEach(function (ele, index) {
+                console.log(dealClass(ele));
+
+                var itemClassArr = dealClass(ele).split(' ');
+                for(var i = 0; i < itemClassArr.length; i++){
+                    if(itemClassArr[i] == className){
+                        filterArr.push(ele);
+                        break;
+                    }
+                }
+            })
+        }
+    
+    11、
+    */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>加速运动：弹性运动</title>
+    <style>
+    
+        div{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 100px;
+            height:100px;
+            background: orange;
+        }
+    
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+    var oDiv = document.getElementsByTagName('div')[0];
+    oDiv.onclick = function () {
+        startMove(this);
+    }
+    function startMove(obj) {
+        clearInterval(obj.timer);
+        var iSpeed = 40, a, u = 0.8;
+        obj.timer = setInterval(function () {
+            a = (300 - obj.offsetLeft) / 8;
+            iSpeed = iSpeed + a;
+            iSpeed = iSpeed * u;
+            if(Math.abs(iSpeed) < 1 && Math.abs(300 - obj.offsetLeft) < 1){
+                clearInterval(obj.timer);
+            }else{
+                obj.style.left = obj.offsetLeft + iSpeed + 'px';
+            }
+        }, 30)
+    }
+    
+    </script>
+</body>
+</html>

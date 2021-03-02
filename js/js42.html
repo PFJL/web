@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>正则表达式</title>
+</head>
+<body>
+
+    <script>
+    // 1、转义字符 "\"：将反斜杠后面的字符强制转化成文本
+        // var str = "abcd";
+        // console.log(str); // 输出 abcd
+
+        // var str1 = "ab\"cd";
+        // console.log(str1);  // 输出 ab"cd
+
+        // var str2 = "ab\\cd";
+        // console.log(str2); // 输出 ab\cd
+        
+    // 2、多行字符串
+        // 可以将回车转义成字符，就不会导致某种情况下报错了
+        // document.body.innerHTML = "<div></div>\
+        //                            <span></span>\
+        //                            <a></a>\
+        //                            ";
+
+        
+
+        
+    /*
+    
+    一、正则表达式 RegExp
+    
+    1、转义字符串 "\"
+
+        \n ：表示换行
+        \t ：表示tab，四个字符缩进
+        \r ：行结束
+
+    2、正则表达式的作用：匹配特殊字符或有特殊搭配原则的字符的最佳选择。
+        校验（表单校验）
+
+    3、正则表达式创建：
+        （1）正则字面量 
+                var reg = /规则/;
+                i ：表示忽视大小写    
+                    var reg = /ab/i;
+                    那么能和reg匹配的必须含有：ab  aB  Ab  AB
+                g ：全局匹配
+        
+        （2）var reg = new RegExp("规则", "igm");
+    
+    [A-z] ：查找任何大写A到小写z
+    var reg = /^a/igm;  ^a 表示开头a
+    var reg = /[^a]/ig; ^a 表示非a
+
+    var reg = /(abc|bcd)/g;  匹配abc或bcd
+
+    \w === [0-9A-z_]
+    \W === [^w]
+
+    \d === [0-9]
+    \D === [^\d]
+
+    \n 换行符
+    \f 换页符
+    \r 回车符
+    \t 制表符
+    \v 垂直制表符
+
+    \s === [\n\f\r\t\v ]
+    \S === [^\s]
+
+    \b === 单词边界
+    \B === 非单词边界
+
+
+    4、自表达式 ()
+     例如：我们要匹配 XXXX类型的字符串，即四个一样的字符串
+     var reg = /(\w)\1\1\1/g;
+     // 1\ 表示反向引用第一个子表达式的内容
+
+     var reg = /(\w)\1(\w)\2/g;
+     // 2\ 表示反向引用第二个子表达式的内容，依次类推
+
+
+     例如：要将aabb形式变为bbaa
+     var reg = /(\w)\1(\w)\2/g;
+     var str = "aabbccdd";
+     console.log(str.replace(reg, "$2$2$1$1")); // 输出 bbaaddcc
+
+     console.log(str.replace(reg, function ($, $1, $2) {
+        return $2 + $2 + $1 + $1;
+     }));
+
+     5、字符串转化：变大写  变小写
+    var str = 'aaabbb';
+    str.toUpperCase();  // AAABBB
+    str.toUpperCase().toLowCase(); // aaabbb
+
+    6、将the-first-name  变成小驼峰式的命名形式
+    var reg = /-(\w)/g;
+    var str = "the-first-name";
+    console.log(str.replace(reg, function ($, $1) {
+        return $1.toUpperCase();
+    }));
+
+    
+        
+
+
+
+
+
+    
+    */
+    var reg = /abc/ig; // abc表示匹配规则
+    var str = 'Abcdabcd';
+    console.log(reg.test(str));  // 返回 true
+    console.log(str.match(reg)); // 返回匹配上的规则字符串
+    // 如果变量str里面有abc片段，就返回true,否则返回false
+
+    var reg1 = /^a/ig; // ^ ：表示开头
+    var str1 = "abca";
+    console.log(str1.match(reg1)); // 只返回一个["a"]
+
+    var reg2 = /^a/igm; // m 表示多行匹配
+    var str2 = "abc\na"; // \n表示换行
+    console.log(str2.match(reg2)); // 输出 ["a", "a"]
+
+    var reg3 = /[0-9][0-9][0-9]/g; // 表示 0到9
+    var reg33 = /[01][12][23]/g;  // 表示三位，每位由中括号里面的其中一个数构成
+    // 表示规则有三位数，一个中括号表示一位，每位0到9
+    var str3 = "12323421411";
+    console.log(str3.match(reg3));
+    console.log(str3.match(reg33));
+    
+    // 首或尾是否含有数字
+    var reg4 = /(^\d|\d$)/g;
+    var str4 = '12345';
+    console.log(str4.match(reg4));
+
+    var reg5 = /(\w)\1(\w)\2/g;
+     var str5 = "aabbccdd";
+     console.log(str5.replace(reg5, "$2$2$1$1"));
+
+
+     // 7、字符串去重
+        var str6 = "aaaaaaaaaaaavvvvsssdddd";
+        var reg6 = /(\w)\1*/g;
+        console.log(str6.match(reg6));
+        console.log(str6.replace(reg6, "$1"));
+
+        var reg7 = /(?=(\B)(\d{3})+$)/g;
+        var str7 = "1000000000000000";
+        console.log(str7.replace(reg7, "."));
+    </script>
+</body>
+</html>

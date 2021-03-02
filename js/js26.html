@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    /*
+    
+    一、es5.0严格模式
+        1、定义：
+            es5严格模式：
+            当启用es5.0，如果es3.0 和es5.0产生冲突的部分就用es5.0,
+            否则，就用es3.0
+        
+        2、启用es5.0的方式（唯一）：
+            "use strict";  // 好处：不会对不兼容严格模式的浏览器产生影响
+            // 必须写在逻辑的最顶端
+
+            （1）不再兼容es3.0的一些规则语法，使用全新的es5.0规范
+                arguments.callee
+
+            （2）两种用法：
+                全局严格模式
+                局部函数内严格模式（推荐）；
+
+            （3）es5.0不可以用的方法：
+                with(){}   // 可以改变作用域，会消耗大量效率，有点恶心，最好少用
+                with(document) {
+                    write('a'); // 输出 a
+                }
+
+                arguments.callee
+                function test(){
+                    console.log(arguments.callee); // 输出 test
+                }
+
+                arguments.caller// 找出执行体
+                等arguments的属性方法不可以用
+
+                变量必须声明之后，才能使用
+
+                * 局部的this必须被赋值，赋什么就是什么，不然就是undefined
+                 var name = 'window';
+                    function person(){
+                        "use strict"; // 启用严格模式
+                        console.log(this);
+                    }
+                person.call(123); // 输出 123
+                person.call({}); // 输出 {}
+
+                但在标准模式下，如果this传一个原始值，它会自动给你包装成对象形式
+
+                拒绝重复属性和参数
+
+        3、es3.0都不能使用eval();  因为它会改变作用域
+          eval(); 可以把字符串当代码执行
+            
+        
+
+
+    */
+    var name = 'window';
+    function person(){
+        "use strict";
+        console.log(this);
+    }
+   person.call(123);
+   person.call({});
+
+    </script>
+</body>
+</html>

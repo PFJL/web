@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>键盘事件</title>
+    <style>
+    input{
+        border: 1px solid #000;
+    }
+    
+    </style>
+</head>
+<body>
+    <input type="text" value="请输入用户名" onfocus="if(this.value == 
+        '请输入用户名'){this.value =''}" onblur="if(this.value==''){
+        this.value = '请输入用户名'}">
+    <script>
+    
+    /*
+    PC端    mousedown   mousemove   mouseup
+    移动端  touchstart  touchmove   touchend
+    相对应
+    一、键盘事件
+        1、keydown 
+        2、keyup 
+        3、keypress
+        keydown  > keypress > keyup
+
+        4、keydown 和 keypress的区别
+            keydown 可以响应任意键盘按钮，keypress只可以
+            检测到字符类按键，即有acsll码的
+            String.fromCharCode(e.charCode); 
+            // 将asc转化为对应的字符
+
+    二、文本类操作事件
+        1、input ：但凡文本改变，都会触发，不管是加空格，还是去空格
+    
+        2、change ：对比的是鼠标聚焦和不聚焦两个状态内容是否一致，
+                    不一致就触发，一致就不触发。
+                
+        3、focus\blur
+    
+    三、窗体类操作事件
+        domTree + cssTree  = randerTree
+        1、窗体操作类（window上的事件）
+
+            （1）scroll
+            （2）load : 得先等整个文档解析完，renderTree构建完,
+                        整个资源下载完，整个页面全部就绪的时候，才会
+                        执行，所以最好别用,因为效率特别低
+                    window.onload = function () {}
+                        
+            系统会先解析，再同时开启一个新的线程去下载
+
+            window.onscroll = function () {
+                console.log(window.pageXOffset + " " 
+                + window.pageYOffset);
+            }
+    
+    */
+   var input = document.getElementsByTagName('input')[0];
+//    input.oninput = function (e) {
+//         console.log(this.value);
+//    }
+    // input.onchange = function (e) {
+    //     console.log(this.value);
+    // }
+
+    </script>
+</body>
+</html>

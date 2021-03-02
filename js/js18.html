@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    /*
+    1、对象的枚举
+        
+        eg1:
+            var obj = {
+                name: 'Mary',
+                age: 18,
+                sex: 'female',
+                height: 168,
+                weight: 75,
+                prop: 123
+            }
+            for(var prop in obj){
+                // 将对象的属性名放到prop中，多少个属性就会循环几圈
+
+                // console.log(prop + " " + typeof(prop)); // 输出obj的属性名，string
+
+                // console.log(obj.prop); 
+                // 输出undefined ,因为js底层原理会把obj.prop --->obj['prop'];
+                // 此处prop就会被当成obj里面的属性。
+                console.log(obj[prop]);
+                
+            }
+
+        eg2：
+            var obj = {
+                name: 'Mack',
+                age: 18,
+                sex: 'female',
+                height: 165,
+                weight: 50,
+                __proto__: { // 原型左右两边是 两个下划线 __
+                    lastName: 'deng',
+                    __proto__: Object.prototype
+                }
+            }
+            Object.prototype.abc = '123';
+            var prop;
+            for(prop in obj){
+                // console.log(obj[prop]); 
+                // 改遍历会把obj里面的属性都拿出来包括原型里面的
+                // 如果我们不想要拿出原型/原型链里面的属性，就得通过
+                // 判断哪个是自己的属性，但不会拿出最终原型链终点的属性
+                // Object.prototype
+                if(obj.hasOwnProperty(prop)){
+                    console.log(obj[prop]);
+                }
+            }
+
+            // function Person() {
+            //     this.name = 'Maick';
+            // }
+            // Person.prototype.age = 12;
+            // var person1 = new Person();
+
+        (2) in 
+            只是用来判断 对象里面你能不能访问这个属性，其中也包括原型里面的
+            var obj = {
+                name: 'Mack',
+                age: 18,
+                sex: 'female',
+                height: 165,
+                weight: 50,
+                __proto__: {
+                    abc: 'abc'
+                }
+            } 
+            var prop;
+            for(prop in obj){
+                console.log(prop in obj); // 输出 true
+            }
+
+            'name' in obj;  // 输出 true
+            'abc' in obj;  // 输出 true
+        
+        (3)instanceof
+            A instanceof B // 判断 A对象是不是B构造函数构造出来的。
+            根本上的的理解是：看A对象的原型链上有没有B的原型
+            
+        (4)
+            var arr = [] || {}; 
+            // 一个变量可能是数组也可能是对象，该如何判断
+            [].constructor  // Array
+            var obj = {};
+            obj.constructor // Object
+
+            // 第二种方法区分
+            [] instanceof Array  // true
+            var obj = {};
+            obj instanceof Array // false
+
+            // 第三种区分方法 toString方法
+            // Object.prototype.toString.call([]);
+            Object.prototype.toString = function() {
+                // 识别 this
+                // 返回相应的结果
+            }
+
+            Object.prototype = {
+                toString: function() {
+
+                }
+            }
+
+            // Object.prototype.toString.call([]); // 输出 "[object Array]"
+            // Object.prototype.toString.call(123); // 输出 "[object Number]"
+            // Object.prototype.toString.call({}); // 输出 "[object Object]"
+
+    */
+
+
+
+    
+    </script>
+</body>
+</html>

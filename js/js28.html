@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM</title>
+</head>
+<body>
+    <div class="a"></div>
+    <div class="a"></div>
+    <div class="a"></div>
+    <div class="a"></div>
+    <div class="a"></div>
+    <script>
+    
+    /*
+    
+    一、DOM的基本操作
+    1、对节点的增删改查：
+        document
+        （1）单独写一个document代表整个文档
+            <document>
+                <html>
+                    <head></head>
+                    <body></body>
+                </html>
+            </document>
+    
+        查找元素：
+        （1）document.getElementById(''); // id是唯一标识
+            <div id="only"></div>
+            var divOnly = docuemnt.getElementById('only');
+        
+        （2）document.getElementsByTagName('div')
+            // 把页面里面的div标签都拿出来,存到类数组中
+
+            var div = document.getElementsByTagName('div')[0];
+
+        （3）document.getElementsByClassName('');
+            // 选中class，集合模式
+
+        （4）document.getElementsByName();
+            // 只有部分标签name可生效（表单、img、iframe）
+        
+        （5）document.querySelector('');
+            // 里面的写法就是css选择器
+            document.querySelectorAll('');
+
+            缺点：不时时，如果已经通过Selector选择元素后，再添加元素或删除Selector
+                不会跟着变，也就是说，Selector是静态的副本。
+            
+            // 除非特殊情况，否正不用这两个。
+    
+    2、遍历节点树：1元素节点 2属性节点 3文本节点 8注释节点  9document 11DocumentFragment
+        （1）parentNode   父节点
+        （2）childNodes   子节点们
+        （3）firstChild   第一个子节点
+        （4）lastChild    最后一个子节点
+        （5）nextSibling  后一个兄弟节点
+        （6）previousSibling  前一个兄弟节点
+
+    3、基于元素节点树的遍历 ：有许多IE不兼容问题，所以少用
+        （1）parentElement    返回当前元素的父元素节点（IE不兼容：ie9及ie9以下）
+        （2）children         只返回当前元素的元素子节点
+        （3）nodechildElementCount == node.child.length  （IE不兼容）当前元素的子节点个数
+        （4）firstElementChild  返回第一个子元素节点（IE不兼容）
+        （5）laseElementChild   返回最后一个子元素节点（IE不兼容）
+        （6）nextElementSibling
+        （7）previousElementSibling
+
+        节点类型：元素节点    1
+                 属性节点    2  
+                 文本节点    3
+                 注释节点    8
+                 document   9
+                 DocumentFragment  11
+        获取节点类型： nodeType
+        属性节点集合： attributes
+        
+
+
+
+            
+
+
+    */
+    var div = document.getElementsByClassName('a')[0];
+    </script>
+</body>
+</html>

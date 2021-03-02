@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>复习</title>
+</head>
+<body>
+    <script>
+    var name = 'hong';
+    function Person(name){
+        this.name = name|| this.name;
+        // var this = {
+        //     name
+        // }
+        console.log(name);
+        console.log(this.name);
+    }
+    var a = new Person();
+    console.log(a.name);
+    Person();
+    /*
+    
+    1、 包装类
+        （1）原始值没有属性和方法，但有些却调用了原始的属性和方法
+            他们的调用就是经过包装类进行调用的。
+            eg1:
+                var str = '123';
+                console.log(str.length);     // new String(str).length
+                console.log(str.toString()); // new String(str).toString()
+
+            eg2:
+                var num = 123;
+                num.name = 'isNum';
+                // new Number(num).name = 'isNum';  // new完就会立即销毁
+                console.log(num.name); 
+                // console.log(new Number(num).name = 'isNum'); 输出 undefined
+
+    2、原型
+        
+        （1）
+            Person.prototype.lastName = 'deng';
+            function Person() {
+                // var this = { // 有new 会隐式的创建this
+                //     __proto__: Person.prototype
+                // }
+            }
+            var person = new Person();
+            console.log(person.lastName);
+
+        （2）Object.create();
+            
+            var demo = {
+                lastName: 'deng'
+            }
+            var obj = Object.create(demo);
+            obj = {
+                __proto__: demo
+            }
+
+        （3）一旦经过var 声明出来的属性（变量），为不可配置性属性
+            即不能delete掉
+
+
+    3、this  call
+        （1）this
+            * 预编译 this --> window
+            * 谁调用的 this 指向谁
+            * call\apply 改变this指向
+            * 全局this --> window
+        
+        （2）call
+            function test() {
+                console.log(this);
+            }
+            test();  ---->  test.call();
+            // 实际上test执行 在内部是被转换成test.call执行的
+
+            eg1:
+                var name = 'window';
+                var obj = {
+                    name: 'obj',
+                    say: function () {
+                        console.log(this.name);
+                    }
+                }
+                obj.say.call(window); // 输出 window
+                var toSay = obj.say;
+                toSay(); // 输出 window
+                toSay.call(obj); // 输出 obj
+
+        （3）call \ apply
+            作用：改变this指向，接用别人多的函数实现自己的功能；
+            区别：传参列表不同
+
+            function Person(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            function Student(name, age, sex) {
+                // var this = Object.create(Student.prototype);
+                Person.call(this, name, age);
+                this.sex = sex;
+            }
+            var student = new Student('cheng', 18, 'male');
+
+    4、闭包：将内部函数保存到外部，就会形成闭包
+        function a() {
+            function b() {
+
+            }
+            return b;
+        }
+
+        （1）属性私有化
+            function Person(name) {
+                var money = 100; // money实现了私有化，外部不能访问
+                this.name = name;
+                this.markMoney = function () {
+                    money ++;
+                }
+                this.offer = function () {
+                    money --;
+                }
+            }
+            var person = new Person();
+
+    
+    */  
+    
+    
+    </script>
+</body>
+</html>

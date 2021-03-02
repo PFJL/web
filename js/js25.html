@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>try catch</title>
+</head>
+<body>
+    <script>
+    
+    /*
+    
+    1、try：尝试
+       catch：捕捉
+       作用：防止我们报错的
+
+       // 在try里面发生错误，不会执行错误后面的try里面的代码
+        
+        try{
+            console.log('a');
+            console.log(b);
+            console.log('c'); // b发生错误，c不会执行
+
+        }catch(e){
+            // 只有当try里面发生错误，catch才能捕捉到并执行里面的代码
+            // 没有错误，catch就不会执行
+            // error.message   error.name
+            console.log(e.name + ' ' + e.message);
+        }
+        
+        （1）Error.name的六种值对应的信息：
+            EvalError：eval() 的使用于定义不一致
+            RangeError：数值越界
+            ReferenceError：非法或不能识别的引用数值
+            SyntaxError：发生语法解析错误
+            typeError：操作数类型错误
+
+
+
+
+
+    2、数组去重
+        （1）数组.indexOf(a参数)  可以查看数组里面有没有a这个值
+            有返回1，  没有返回 -1
+            var arr = [1, 2, 3];
+            arr.indexOf(1);  // 返回 1
+            arr.indexOf('a'); // 输出 -1
+
+    */
+    var arr = [1, 1, 2, 2, 'a', 'a'];
+    // 第一种方法
+    // function test(arr) {
+    //     var newArr = [],
+    //         len = arr.length;
+    //     for(var i = 0; i < len; i ++){
+    //         if(newArr.indexOf(arr[i]) == -1){
+    //             newArr.push(arr[i]);
+    //         }
+    //     }
+    //     return newArr;
+    // }
+
+    // 第二种方法
+    // function test(arr){
+    //     var obj = {},
+    //         newArr = [],
+    //         len = arr.length;
+    //     for(var i = 0; i < len; i ++){
+    //         if(!obj[arr[i]]){
+    //             newArr.push(arr[i]);
+    //             obj[arr[i]] = true;
+    //         }
+    //     }
+    //     return newArr;
+    // }
+
+    // 第三种方法es6  new Set(arr)
+    
+
+   
+
+    </script>
+</body>
+</html>

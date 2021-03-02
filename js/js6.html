@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>预编译</title>
+</head>
+<body>
+    <script>
+    /*
+    1、js运行三部曲
+        （1）语法分析：通篇扫描，但不执行，看看是否有语法上的错误，
+
+        （2）预编译
+
+        （3）解释执行
+
+    2、预编译
+        （1）imply global暗示全局变量：即任何变量，如果变量未经声明就赋值，此变量就为全局对象所有。
+             即window对象所有。
+             a = 10; ------> window.a = 10;
+             window {
+                 a : 10;
+             }
+
+        （2）一切声明的全局变量，全是window属性
+             var a = 123;------> window.a = 123;
+             window {
+                 a : 123;
+             }
+
+        （3）window就是全局的域（类似于仓库）
+
+            function test() {
+                // window { b 未经声明就赋值归window所有
+                //     b : 123
+                // }
+                // a = window.b; 
+                var a = b = 123;
+            }
+            test();
+            console.log(window.b); // 输出123
+            console.log(window.a); // 输出undefined
+
+            
+    3、函数预编译：发生在函数执行的前一刻
+        （1）创建AO对象（Activation Object）：执行期上下文
+
+        （2）找形参和变量声明，将变量和形参作为AO属性名，值为undefined
+
+        （3）将实参和形参值相统一
+
+        （4）找函数体的函数声明，并赋予函数体
+
+        function test(a) {
+            console.log(a);
+            function a() {
+                // 输出f a() {}
+            }
+        }
+        test(1);
+
+        AO {
+            a: function a(){}
+        }
+
+    4、全局预编译   GO对象（Global Object）=== window对象
+        （1）找变量声明，并赋予undefined
+        （2）找函数声明，赋值函数体
+    */
+    
+    
+    </script>
+</body>
+</html>

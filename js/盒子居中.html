@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .wrap1{
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: rgba(12,34,34,0.5);
+        }
+        .box1{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -50px;
+            margin-top: -25px;
+            width: 100px;
+            height: 50px;
+            background: red;
+        }
+
+        .wrap2{
+            display: flex;
+            width: 100%;
+            height: 200px;
+            background: rgba(250, 147, 240, 0.5);
+        }
+        .box2{
+            margin: auto;
+            width: 100px;
+            height: 50px;
+            background: yellow;
+        }
+
+        .wrap3{
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: rgba(213, 236, 108, 0.5)
+        }
+        .box3{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 100px;
+            height: 50px;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- 知道宽高 -->
+    <div class="wrap1">
+        <div class="box1"></div>
+    </div>
+
+    <!-- 知道宽高 -->
+    <div class="wrap2">
+        <div class="box2"></div>
+    </div>
+
+    <!-- 不知道宽高实现绝对居中 -->
+    <div class="wrap3">
+        <div class="box3"></div>
+    </div>
+</body>
+</html>

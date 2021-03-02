@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 斐波那契数列：输入第几位输出相应位的值
+        // function getFa(num){
+        //     // 定义三个数字分别来存放斐波那契数列的前三位
+        //     let firstNum = 1,
+        //         secondNum = 1,
+        //         thirdNum;
+            
+        //     // 判断输入的第几位是否正确输入和输出相应位的值
+        //     if(num > 0 && num <= 2){
+        //         console.log('斐波那契数列第' + num + '位是' + 1);
+        //     }else if( num > 2){
+        //         for(var i = 3; i <= num; i ++){
+        //             thirdNum = firstNum + secondNum;
+        //             firstNum = secondNum;
+        //             secondNum = thirdNum;
+        //         }
+        //         console.log('斐波那契数列第' + num + '位是' + thirdNum);
+        //     }else{
+        //         console.log('请输入正整数')
+        //     }
+        // }
+        // getFa(parseInt(window.prompt('input')));
+
+        // function A() {
+        //     // name = 'lisi';
+        //     this.name = 'zhangsan';
+        //     console.log(name);
+        //     console.log(this.name);
+        // }
+        // new A();
+        // var this = {
+        //     name: 'zhangsan',
+        //     __proto__: 
+        // }
+
+
+        // function bar1(){
+        //     // 输出undefined
+        //     return
+        //     {
+        //         foo: "hello"
+        //     };
+        // }
+
+        function sum(a, b){
+            if(b){
+                return a + b;
+            }else{
+                return function(a1){
+                    return a + a1;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

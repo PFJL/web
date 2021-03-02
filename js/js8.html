@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>作用域</title>
+</head>
+<body>
+    <script>
+    /*
+    
+    1、作用域伴随函数产生而产生，函数就是一个特殊的对象（函数对象）
+        function test() {
+
+        }
+        test.name
+        test.prototype // 这两个函数对象属性，我们可以访问
+        
+         // 叫做域（存的是函数的作用域），隐式的属性，我们不可以访问
+
+    2、[[scope]]：每个javascript函数都是一个对象，对象中有些属性我们可以访问，
+       但有些不可以，这些属性仅供javascript引擎存取，[[scope]]就是其中之一。
+
+       [[scope]]指的就是我们所说的作用域，其中存储了运行期上下文的集合。
+
+       什么是（运行）执行期上下文：就是我们所说的AO对象，当函数执行前一刻，
+            会创建一个成为执行期上下文的的内部对象。一个执行期上下文定义了一个函数
+            执行时的环境，函数每执行时对应的执行上下文都是独一无二的，所以多次调用
+            一个函数会导致创建多个执行上下文，当函数执行完毕，它所产生的执行上下文
+            就会被销毁。
+
+    3、作用域链：[[scope]]中所存储的执行期上下文对象的集合，这个集合呈链式链接，
+       我们把这种链式链接叫做作用域链。
+
+    4、查找变量：运行哪个函数的时候就从哪个函数的作用域链的顶端依次向下查找。
+
+        function testA() {
+            testB();
+        }
+        testA();
+
+        // testA()的出生（声明）和执行
+        a defined  a.[[scope]] ---> 0: GO{}  // 函数声明的时候
+
+        a doing    a.[[scope]] ---> 0: aAO{}  // 函数执行的前一刻
+                                    1: GO{}
+        
+        // testB()的出生（声明）和执行：因为testB()的出生是建立在testA()的执行环境之上的。
+        [[scope]] ---> 0: aAO{ // testA()的AO对象 }  //testB()函数声明
+                       1: GO{}
+        
+        [[scope]] ---> 0: bAO{ // testB()的AO对象 }  // testB()函数执行的前一刻
+                       1: aAO{ // testA()的AO对象 }
+                       2: GO{}
+        
+    */    
+
+    </script>
+</body>
+</html>

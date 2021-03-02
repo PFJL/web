@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    
+    1、闭包
+        function test() {
+            var arr = [];
+            for(var i = 0; i < 10; i++) {
+                arr[i] = function () {
+                    document.write(i + " ");
+                }
+            }
+            return arr;
+        }
+
+        var myArr = test();
+        for(var j = 0; j < 10; j++){
+            myArr[j]();
+        }
+
+        // 输出10个10 ：因为return arr;只有等上面数组arr赋值循环完成之后
+                       才会整体返回arr，但他们公用 i 变量，
+                       因此循环10次之后 i = 10;才返回
+
+        // 解决办法 ：运用立即执行函数进行执行，执行完就切断与testAO{}对象中公用变量的联系
+        function test() {
+            var arr = [];
+            for(var i = 0; i < 10; i++) {
+                (function (j) {
+                    arr[j] = function () {
+                        document.write(j + " ");
+                    }
+                }(i))
+            }
+            return arr;
+        }
+
+        var myArr = test();
+        for(var j = 0; j < 10; j++){
+            myArr[j]();
+        }   
+    
+    2、逗号运算符：先运算前面再运算后面，返回后面的值
+        var a = (2, 3); // 输出 3
+        var b = (1 - 1, 1 + 1); // 输出 2
+        var c = (1, 2, 3, 4);  // 返回 4
+
+        eg：
+            var f = (
+                function f() {
+                    return "1";
+                },
+                function g() {
+                    return 2;
+                }
+            )();
+            console.log(typeof(f));  // 输出 number
+        
+        eg: 
+            var x = 1;
+            if(function f() {}){
+                x += typeof(f);
+            }
+            console.log(x);  // 输出 字符串类型的  1undefined
+
+            // 原因：if里面的function f() {} 作为条件来使用，外面加里一个括号
+            //      就变成了表达式，f就不再是函数声明，
+            //      typeof(a);  是唯一一个未定义就输出不会报错的。
+    */ 
+    var x = 1;
+    if(function f() {}){
+        x += typeof(f);
+    }
+    console.log(x);  // 输出 字符串类型的  1undefined
+
+    // 原因：if里面的function f() {} 作为条件来使用，外面加里一个括号
+    //      就变成了表达式，f就不再是函数声明，
+    //      typeof(a);  是唯一一个未定义就输出不会报错的。
+    </script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>命名空间</title>
+</head>
+<body>
+    <script>
+    
+    /*
+    1、命名空间：实际上就是一个对象（在总的js里面），用来存放变量的。
+                防止同一个html文件引入多个js文件，
+                里面的变量发生冲突。
+                var org = {
+                    department1: { // 部门1
+                        zhangsan: {
+
+                        },
+                        lisi: {
+
+                        }
+                    },
+                    department2: {
+                        wangwu: {
+
+                        }
+                    }
+                }
+                var zhangsan = org.department1.zhangsan; // 用法
+            但这种现在基本不用了。
+            现在用webpack,等框架
+
+    2、通过闭包来封装，模块发开发，留出函数接口，可以实现属性私有化，不会污染全局变量。
+        init表示入口的意思，初始化。
+
+        var init = (function() {
+            var name = 'abc';
+            function callName() {
+                console.log(name);
+            }
+            return function () {
+                callName();
+            }
+        }())
+        init(); // 输出 abc
+
+        var init = (function() {
+            var name = 'abc';
+            var age = 20;
+            function callName() {
+                console.log(name);
+            }
+            function callAge() {
+                console.log(age);
+            }
+            return function () {
+                callName(),
+                callAge();
+            }
+        }())
+        init(); // 输出 abc  20
+
+        eg1:
+            var init = (function() {
+                var name = 'abc';
+                var age = 20;
+                var obj = {
+                    callName: function callName() {
+                                console.log(name);
+                            },
+                    callAge: function callAge() {
+                                console.log(age);
+                            }
+                }
+                return obj;
+            }())
+
+    3、如果你想实现一个方法的连续调用 在方法里面 return this 表示返回自己
+        var deng = {
+            smoke: function() {
+                console.log('Smoking!');
+                return this;
+            }
+            dring: function () {
+                console.log('Dring!');
+                return this;
+            }
+        }
+        deng.somke().dring();  // 输出 Smoking!  Drink!
+    
+    4、obj.name 实际上系统会隐式的转换成 obj['name'];
+        var deng = {
+            wife1: {name: 'xiaoliu'},
+            wife2: {name: 'xiaozhang'},
+            wife3: {name: 'xiaoli'},
+            wife4: {name: 'xiaoxuan'},
+            sayWife: function (num) {
+                return this['wife' +  num]; // 可以实现字符串的拼接
+            }
+        }
+
+        this用法小结：
+
+        (1)在函数里面，没有new 没有this.a
+            this.a 指的就是 window.a
+            var a = 2;
+            function aa() {
+                var a = 1;
+                alert(a);
+                alert(this.a);
+            }
+        
+        没有new 有this.a  有var a
+        var a > this.a
+        var a = 2;
+        function aa() {
+            this.a = 1;
+            alert(a); // 输出 1
+            alert(this.a); // 输出 1
+        }
+        (2)在对象里面，this.a 指的就是对象自己的属性a,没有就输出 undefined
+                      a 指的是声明出来的变量，但对象自己里面又不能var（除了对象方法里面var）
+                      所以a 指的是对象父级的变量\window
+                    var a = 2;
+                    var aa = {
+                        a: '我是对象里面的a',
+                        b: function() {
+                            return a; // 输出 2
+                        },
+                        c: function() {
+                            return this.a; // 输出 我是对象里面的a
+                        }
+                    }
+
+
+
+    */
+   var callName = 2;
+   function A() {
+       this.name = 'zhangsan';
+       alert(name);
+       alert(this.name);
+   }
+    
+    
+    
+    
+    var counter = (function () {
+        var count = 0;
+        function demo() {
+            count ++;
+            console.log(count);
+        }
+        return demo;
+    }())
+
+    var init = (function () {
+        var name = 'abc';
+        var age = 20;
+        function callName() {
+            console.log(name);
+        }
+        function callAge() {
+            console.log(age);
+        }
+        return function() {
+            callName();
+            callAge();
+        }
+    }())
+
+    var init1 = function () {
+        var name = 'abc';
+        var age = 20;
+        function callName() {
+            console.log(name);
+        }
+        function callAge() {
+            console.log(age);
+        }
+        return callName;
+    }
+
+   
+
+    </script>
+</body>
+</html>

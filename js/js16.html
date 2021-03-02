@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    /*
+    1、只要是个函数就有原型，不一定非得构造函数才有。
+
+    一、继承发展史
+    1、传统形式 -> 原型链
+        过多的继承了没用的属性。
+        Grand.prototype.lastName = "Ji";
+        function Grand() {
+
+        }
+        
+        var grand = new Grand();
+
+        Father.prototype = grand;
+        function Father() {
+            this.name = 'hehe';
+        }
+        var father = new Father();
+        
+        Son.prototype = father();
+        function Son() {
+
+        }
+        var son = new Son();
+    
+    2、call\apply：借用构造函数
+        * 不能继承借用构造函数的原型
+        * 每次构造函数都要多走一个函数：每调用一次构造函数，相当于执行两个方法
+        function Person(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        function Student(name, age, sex, grande) {
+            Person.call(this, name, age, sex);
+            this.grande = grande;
+        }
+        var student = new Student();
+    
+    3、共享原型
+        * 不能随便改动自己原型
+        Father.prototype.lastName = 'Deng';
+        function Father() {
+
+        }
+        function Son() {
+
+        }
+        Son.prototype = Father.prototype;
+        var son = new Son();
+        var father = new Father();
+        
+        （1）抽象出技能，封装成函数，函数就代表功能的复用。
+        function inherit(Target, Origin){
+            Target.prototype = Origin.prototype;
+        }
+        inherit(Son, Father);
+
+        （2）不足：修改自己的原型，另一个也会跟着修改。
+    
+    4、圣杯模式：既可以修改自己的，又不会影响继承对象的原型。
+        Father.prototype.lastName = 'Deng';
+        function Father() {
+
+        }
+        function Son() {
+
+        }
+        function inherit(Target, Origin) {
+            function F() {};
+            F.prototype = Father.prototype;
+            Target.prototype = new F();
+        }
+        inherit(Son, Father);
+        var son = new Son();
+        var father = new Father();
+
+        完善：（圣杯模式）
+        Father.prototype.lastName = 'Deng';
+        function Father() {
+
+        }
+        function Son() {
+
+        }
+        function inherit(Target, Origin) {
+            function F() {};
+            F.prototype = Origin.prototype;
+            Target.prototype = new F();
+            Target.prototype.constructor = Target; // 构造函数是谁
+            Target.prototype.uber = Origin.prototype; // 可以查看Target最终原型来源是谁
+        }
+        inherit(Son, Father);
+        var son = new Son();
+        var father = new Father();
+
+        (1)闭包，可以实现封装，属性私有化：闭包里面的变量都可以实现私有，因为外部根本就访问不到它。
+        高大尚写法：
+        var inherit = (function () {
+            var F = function () {}; // 将F实现私有，因为F只是用来实现过度，没必要暴露出去。
+            return function(Target, Origin) {
+                F.prototype = Origin.prototype;
+                Target.prototype = new F();
+                Target.prototype.constructor = Target; // 构造函数是谁
+                Target.prototype.uber = Origin.prototype; 
+            }
+        }());
+    */
+    
+
+    var inherit = (function () {
+        var F = function () {};
+        return function (Target, Origin) {
+            F.prototype = Origin.prototype;
+            Target.prototype = new F();
+            Target.prototype.constructor = Target;
+            Target.prototype.uber = Origin.prototype;
+
+        }
+    }())
+
+
+
+
+
+    // 圣杯模式
+    var inherit = (function(){
+        var F = function (){};
+        return function (Target, Origin){
+            F.prototype = new Origin();
+            Target.prototype = new F();
+            Target.prototype.constructor = Target;
+            Target.prototype.uber = Origin.prototype;
+        }
+    }())
+
+    </script>
+</body>
+</html>

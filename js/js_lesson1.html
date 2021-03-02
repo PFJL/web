@@ -1,0 +1,170 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8"> 
+	<meta content="" name="keywords">
+	<meta content="" name="descript">
+	<title>js介绍、入门、js引入、变量、值类型、运算符</title>
+</head>
+<body>
+	<!-- 
+		主流浏览器及其内核
+		IE	trident  ms
+		firefox  Gecko moz
+		Chrome blink	webkit
+		opera	presto  o
+		Safari	webkit  webkit 
+	1、js引入 
+		（1）页面级引入js
+		 <script type="text/javascript">内容</script>
+		 写在哪里都生效，不管是head还是body
+		 <script type="text/javascript">
+			document.write('hello world')
+			console.log('hello world')
+		 </script>
+
+		 （2）外部js文件
+		 <script type="text/javascript" src="js1.js"></script>
+		 写在head
+	
+	2、js脚本语言(动态语言)：变量
+	-->
+	<script type="text/javascript">
+		// （1）变量（声明变量的关键字只有var一个）
+		//var a; // 向系统申请一个变量（变量声明）
+		//a = 100; //变量赋值
+
+		//var b = 100; // 发生两个过程：变量声明/变量赋值
+
+		// 尽量多个变量一起申请（单一var模式：可以提高效率）
+		// var c, d, f, g;
+		/*
+			这样写更符合规范
+			var c,
+				d = 10,
+				f,
+				g;
+
+			// 变量-运算：先运算在赋值。
+			a = b + d;
+			document.write(a)
+		*/
+
+		/*
+		(2)数据类型：原始值stack、引用值heap
+		js是解释性语言，声明变量的关键字只有一个var，解释的时候可以自动识别数据类型。
+
+		原始值： 保存在栈（stack）中
+		栈（stack）内存：
+			先进后出，变量赋值给变量是拷贝的关系，赋值完它两就没关系了，无论谁的值改变都不会影响另一个值。
+			var a = 10;
+			var b = a;
+			a = 20;
+			document.write(a,b); // 输出 20 10
+
+
+		Number  Boolean  String undefined  null
+		Number:
+			var a = 12.22; // js天生是浮点型
+			var b = 12;
+
+		String:
+			var name = "路飞"
+			document.write(name)
+
+		Boolean: true、false
+			var a = true;
+			var b = false;
+
+		undefined: 是一个类型
+			var a;
+			document.write(a); // 未赋值就会输出undefined
+								// 未声明就输出会报错
+								// 未声明就赋值，变量归全局所有
+
+		null：占位符，代表空
+	
+		引用值： 保存在堆（heap）中 
+		堆（heap）存储
+			数据怎么放进去既可以怎么出来，
+			存数据是：例如 var arr = [1,2];
+			会先在栈（stack）中申请一个房间或变量，房间号或变量名为arr，当解释到后面值的时候发现是数组，就会将数组的值放到堆（heap）中，把堆中的地址赋值给栈（stack）中的房间号或变量。
+			var arr = [1];
+			var arr1 = arr;
+			arr.push(2);
+			document.write(arr1); // 输出1, 2
+			表示： arr赋值给arr1实际上是地址
+			
+			var arr = [1];
+			var arr1 = arr;
+			arr = [2];
+			document.write(arr1); // 输出1
+
+			因为：对arr进行重新数组赋值，那么arr就会在堆（heap）中重新开一个房间，把房间的新地址重新赋值给arr，那么它两的地址就不一样了。
+RegExp
+
+
+		array、object、function  ...、date、RegExp（正则）
+
+		array: 数组
+		var arr = [];
+		var arr1 = [1, 2, 3, false]
+		document.write(arr1); // 会输出1, 2, 3, 4, false
+
+		*/
+
+		/*
+		3、错误分类
+		（1）低级错误（语法解析错误）
+			通篇扫描，发现有低级的错误，代码一行也不会执行，例如少个分号
+
+		（2）逻辑错误
+			错误后面的代码都不会执行，例如用了未定义的变量等
+
+		（3）js语法错误会导致代码终止，但不会影响到其他代码块
+
+		*/
+
+		/*4、运算符
+		（1）+号：数学运算、字符串链接
+		（2）任何东西加上字符串都等于字符串。
+		（3）运算顺序自左向右，先乘除后加减，括号优先
+			var a = "a" + 1 + 1;    a11
+			var b = 1 + 1 + "a" + 1 + 1;  2a11
+
+		（4）凡是运算应该得出一个数学类型的值（Number）,但他有没法表示的时候就用  NaN  ：他是一个Number类型的
+			var a = 0 / 0;   输出NaN （Not a Number）
+			var b = 1 / 0;   输出 Infinity 无穷
+			var c = 1 % 4;   输出 1   mod
+
+			var a = 123,
+				b = 234; // 不使用其他变量，实现a、b交换
+			
+			a = a + b;
+			b = a - b;
+			a = a - b;
+			
+		（5）++  和  --
+			a++ 表示先执行语句，再++
+			++a  表示先++ ，再执行本条语句
+			var a = 10;
+			document.write(a++);  输出10 
+			document.write(++a);  输出11
+
+		*/
+		function test() {
+			var i = 0;
+			if(i++){
+				console.log(1);
+			}else{
+				console.log(2);
+			}
+		}
+		test();
+		// String.prototype.toString = function () {
+		// 	return 'abc';
+		// };
+		// var str = '123';
+		// document.write(str.toString());
+	</script>
+</body>
+</html>

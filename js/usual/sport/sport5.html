@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+        ul{
+            position: relative;
+            width: 600px;
+            height: 80px;
+            margin: 100px auto 0;
+        }
+        ul li.nav{
+            width: 148px;
+            height: 78px;
+            border: 1px solid black;
+            float: left;
+            color: #f40;
+            text-align: center;
+            line-height: 78px;
+        }
+        ul li.bg{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            opacity: 0.5;
+            width: 150px;
+            height: 78px;
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="nav">a</li>
+        <li class="nav">b</li>
+        <li class="nav">c</li>
+        <li class="nav">d</li>
+        <li class="bg"></li>
+    </ul>
+    <script>
+    
+    var oLiArray = Array.prototype.slice.call(document.getElementsByClassName('nav'), 0);
+    var oBg = document.getElementsByClassName('bg')[0];
+    oLiArray.forEach(function (ele, index) {
+        ele.onmouseenter = function () {
+            var newLeft = this.offsetLeft;
+            startMove(oBg, newLeft);
+        }
+    })
+
+    // 弹性函数
+    function startMove(obj, target) {
+        clearInterval(obj.timer);
+        var iSpeed = 40, a, u = 0.8;
+        obj.timer = setInterval(function () {
+            a = (target - obj.offsetLeft) / 8;
+            iSpeed = iSpeed + a;
+            iSpeed = iSpeed * u;
+            if(Math.abs(target - obj.offsetLeft) < 1 && Math.abs(iSpeed) < 1){
+                clearInterval(obj.timer);
+                obj.style.left = target + 'px';
+            }else{
+                obj.style.left = obj.offsetLeft + iSpeed + 'px';
+            }
+        }, 30)
+    }
+
+
+    </script>
+</body>
+</html>

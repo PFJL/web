@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    ul{
+        list-style: none;
+    }
+    li:nth-of-type(2n){
+        background: #ccc;
+    }
+    li:nth-of-type(2n+1){
+        background:#aaa;
+    }
+    </style>
+</head>
+<body>
+    <!-- 
+
+    1、HTML顶部DOCTYPE有什么作用？有什么影响
+        DOCTYPE是document type(文档类型)的简写，在web设计中用来声明文档类型。 
+        在所有 HTML 文档中规定 DOCTYPE 是非常重要的，这样浏览器就能了解预期的文档类型， 
+        告诉浏览器要通过哪一种规范（DTD）解析文档（比如HTML或XHTML规范）。 
+        DOCTYPE会影响代码验证，并决定了浏览器最终如何显示你的Web文档。
+
+    2、Display 的参数值及其含义
+        none：        隐藏元素，且不会占用空间，即页面中的布局消失。
+        inline：      行级元素，内容决定元素所占位置，不可通过css改变宽高
+        block:        块级元素，独占一行，可以通过css改变宽高
+        inline-block: 行级块元素，内容决定元素所占位置，可以通过css改变宽高。
+
+    3、描述一下盒模型
+        margin > border > padding > content
+
+    
+    4、
+     -->
+
+
+
+    <ul>
+        <li>a</li>
+        <li>a</li>
+        <li>a</li>
+        <li>a</li>
+    </ul>
+    <script>
+        function test() {
+            var liColl = document.getElementsByTagName('li');
+            for(var i = 0; i < liColl.length; i++){
+                // 相当于把内部函数保存到外部，会触发闭包。
+                // liColl[i].onclick = function () {
+                //     console.log(i);
+                // }
+
+                // 解决办法：
+                (function (j) {
+                    liColl[j].onclick = function () {
+                        console.log(j);
+                    }
+                }(i))
+            }
+        }
+        test();
+    </script>
+
+    <script>
+        /*
+        GO {
+            a: undefined,
+            demo: function demo(e) {},
+            f: 123
+        }
+        AO {
+            e: undefined 1 funciont e() {}  2,
+            b: undefined,
+            c: undefined function c() {},
+            a: undefined 10
+        }
+        */
+        function demo(e) {
+            function e() {}
+            arguments[0] = 2;
+            document.write(e); // 输出 2
+            if(a) {
+                var b = 123;
+                function c() {
+                    // 输出
+                }
+            }
+            var c;
+            a = 10;
+            var a;
+            document.write(b); // 到if 语句时，a为undefined 输出 undefined
+            f = 123;
+            document.write(c); // 输出 function
+            document.write(a); // 输出 10
+        }
+        var a;
+        demo(1);
+        document.write(a); // 输出 undefined
+        document.write(f); // 输出 123
+
+    </script>
+
+    <script>
+        // 输入一个字符串，计算字符串的字节长
+        function retByteslen(target) {
+            // var count = 0;
+            // for(var i = 0; i < target.length; i++){
+            //     if(target[i].charCodeAt() <= 255){
+            //         count += 1;
+            //     }else if(target[i].charCodeAt() > 255){
+            //         count += 2;
+            //     }
+            // }
+
+            // 优化
+            var count,
+                len;
+                count = len = target.length;
+            for(var i = 0; i < len; i++){
+                if(target.charCodeAt(i) > 255){
+                    count ++;
+                }
+            }
+            console.log(count);
+        }
+        var len = window.prompt('input');
+        retByteslen(len);
+    </script>
+</body>
+</html>

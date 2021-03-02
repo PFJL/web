@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4、typeof 类型转换</title>
+</head>
+<body>
+    <script type="text/javascript">
+        /*
+            1、数组
+                var arr = [1, false, "a", undefined, null];
+                arr[0];
+                arr.length;
+                for( var i = 0; i <= arr.length; i++){
+
+                }
+
+            2、对象
+                var obj = {
+                    arr: [1, 2, 3],
+                    name: 'lufei',
+                    age: 20,
+                    friends: {
+                        friName1: 'namei',
+                        friName2: 'zuolong',
+                    }
+                }
+            
+            3、typeof可以显示类型，六种：
+                number  string boolean  undefined object function 
+                
+                （1）其中object表示一种范范的引用值：object、array、null
+                早期的null表示空，用于对象的占位符 
+
+                typeof(a) 是唯一没有定义输出不会报错的。
+
+                console.log(typeof('a'));  // 输出string
+                console.log(typeof(typeof(a)));  // 输出string
+                console.log(typeof(a));  // 输出undefined
+                console.log(typeof(undefined)); // 输出undefined
+                console.log(typeof(NaN));  //输出number
+                console.log(typeof(null)); // 输出 object
+                console.log(typeof(Array)); // 输出 object
+            
+            4、类型转换：显式类型转换（直接加类型进行强制转换）
+               Number：
+                (1)
+                    var num = Number(123);
+                    console.log(typeof(num) + ':' + num); // 输出number
+
+                    var num = Number('123aa');
+                    console.log(typeof(num) + ':' + num); // 输出number:NaN
+                (2)
+                    能用具体数字表示的就转换为具体数字，不能转换为具体数字的就用NaN表示
+                    Number('a') // 输出NaN
+                    Number(undefined) // 输出 NaN
+                (3) Number(false);  // 0
+                    Number(true);   // 1
+                    Number(null);   // 0
+                    Number(NaN);    // NaN
+                    Number('');     // 0
+                    
+                    var obj = {};
+                    console.log(Number(obj)); // 输出NaN
+
+                (4)parseInt()表示将里面的东西转化成整形，做截断，从左往右识别，到非数字位就停止。
+
+                    var demo = '';
+                    console.log(parseInt(demo)); // 输出NaN
+
+                    // var demo = true/false/undefined/null/''/NaN;
+                    // console.log(parseInt(demo)); // 输出NaN
+
+
+                    var demo = '123';
+                    console.log(parseInt(demo));  // 输出123
+
+                    var demo = '123a';
+                    console.log(parseInt(demo));  // 输出123
+
+                    var demo = '-123aad';
+                    console.log(parseInt(demo));  // 输出-123
+
+                    var demo = '123.324adf';
+                    console.log(parseInt(demo));  // 输出123
+
+                    var demo = '';
+                    parseInt(demo, 16);  // 表示以目标进制16为基地，转化为10进制
+
+            String: 一且皆可变换成字符串类型
+            
+            toString(): 
+                (1)将目标转化为字符串
+                    undefined和null没有toString()属性
+                    var demo = undefined;
+                    var demo = null;
+                    console.log(demo.toString);   // 报错
+
+                    var obj = {};
+                    obj.toString() // "[object Object]"
+                    var arr = [];
+                    arr.toString() // ""
+                    var arr = [1,2];
+                    arr.toString() // "1,2"
+                
+                (2)toString(16)：表示将以十进制为基底，转化为16进制
+                    var demo = 15;
+                    console.log(demo.toString(16));  // 输出f
+            
+            5、隐式类型
+
+
+        */
+        var num = Number('123aa');
+        console.log(typeof(num) + ':' + num); // 输出number:NaN
+
+        var obj = {};
+        console.log(Number(obj));
+
+        // var demo = undefined;
+        // var demo = null;
+        // console.log(demo.toString);   // 报错
+
+        var demo = 30;
+        console.log(demo.toString(16));
+
+        console.log(null == 0);
+        console.log(null > 0);
+        console.log(null < 0);
+        console.log(undefined == 0);
+        console.log(undefined > 0);
+        console.log(undefined < 0);       // 上面的都输出false
+        console.log(undefined == null);   // 输出true
+        console.log(NaN == NaN);    // 输出false
+
+        console.log(Number('123abc'));
+
+        console.log(parseInt(''));
+
+        
+    </script>
+</body>
+</html>
